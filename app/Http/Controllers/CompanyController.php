@@ -57,7 +57,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = CompanyEloquent::findOrFail($id);
+        return View::make('company.show', compact('company'));
     }
 
     /**
@@ -68,7 +69,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = CompanyEloquent::findOrFail($id);
+        return View::make('company.edit', compact('company'));
     }
 
     /**
@@ -80,7 +82,10 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $company = CompanyEloquent::findOrFail($id);
+        $company->fill($request->all());
+        $company->save();
+        return Redirect::route('company.index');
     }
 
     /**
@@ -91,6 +96,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = CompanyEloquent::findOrFail($id);
+        $company->delete();
+        return Redirect::route('company.index');
     }
 }

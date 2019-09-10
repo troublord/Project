@@ -33,19 +33,42 @@
                     <div class="card-body">
                         <div class="container-fluid p-0">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <h4 class="card-title">{{ $company->company_name }}</h4>
+                                </div>
+                                <div class="col-md-4">
+                                @auth
+                                        <form action="{{ route('company.destroy', ['id' => $company->company_id]) }}" method="POST">
+                                            @csrf
+                                            <a href="{{ route('company.edit', ['id' => $company->company_id]) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-pencil-alt"></i>
+                                                <span class="pl-1">編輯</span>
+                                            </a>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                                <span class="pl-1">刪除</span>
+                                            </button>
+                                        </form>
+                                    @endauth
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
                                     @if($company->company_contact != null)
-                                        <span class="badge badge-secondary ml-2">
+                                        <span class="badge ml-2">
+                                        <a href="{{ route('company.show', ['id' => $company->company_id]) }}" class="float-right card-link">
+                                            詳細資料
                                             {{ $company->company_contact }}
+                                        </a>
                                         </span>
                                     @endif
                                 </div>
+                                <div class="col-md-4">
+                                {{ $company->created_at }}
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
