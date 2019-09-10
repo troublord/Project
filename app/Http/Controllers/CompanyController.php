@@ -32,7 +32,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        return View::make('company.create', compact('companies'));
     }
 
     /**
@@ -43,7 +44,9 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = new CompanyEloquent($request->all());
+        $company->save();
+        return Redirect::route('company.index');
     }
 
     /**
