@@ -15,7 +15,6 @@
 // });
 
  Route::get('/', 'HomeController@index')->name('index');
-Route::get('search', 'HomeController@search')->name('search');
 
  Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
  Route::post('login', 'Auth\LoginController@login');
@@ -23,3 +22,5 @@ Route::get('search', 'HomeController@search')->name('search');
 // Auth::routes();
 
 Route::resource('company', 'CompanyController');
+Route::get('companysearch','HomeController@companysearch');
+Route::resource('workpiece', 'WorkpieceController');

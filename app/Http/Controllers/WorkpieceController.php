@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use View;
 use Redirect;
-use App\Company as CompanyEloquent;
+use App\Workpiece as WorkpieceEloquent;
 
-class CompanyController extends Controller
+class WorkpieceController extends Controller
 {
     public function __construct()
     {
@@ -26,8 +26,8 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
-        return View::make('company.index', compact('companies'));
+        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
+        return View::make('workpiece.index', compact('workpieces'));
     }
     /**
      * Show the form for creating a new resource.
@@ -36,8 +36,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
-        return View::make('company.create', compact('companies'));
+        $workpiece = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
+        return View::make('workpiece.create', compact('workpiece'));
     }
 
     /**
@@ -48,9 +48,9 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $company = new CompanyEloquent($request->all());
-        $company->save();
-        return Redirect::route('company.index');
+        $workpiece = new WorkpieceEloquent($request->all());
+        $workpiece->save();
+        return Redirect::route('workpiece.index');
     }
 
     /**
@@ -61,8 +61,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company = CompanyEloquent::findOrFail($id);
-        return View::make('company.show', compact('company'));
+        $workpiece = WorkpieceEloquent::findOrFail($id);
+        return View::make('workpiece.show', compact('workpiece'));
     }
 
     /**
@@ -73,8 +73,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = CompanyEloquent::findOrFail($id);
-        return View::make('company.edit', compact('company'));
+        $workpiece = WorkpieceEloquent::findOrFail($id);
+        return View::make('workpiece.edit', compact('workpiece'));
     }
 
     /**
@@ -86,10 +86,10 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $company = CompanyEloquent::findOrFail($id);
-        $company->fill($request->all());
-        $company->save();
-        return Redirect::route('company.index');
+        $workpiece = WorkpieceEloquent::findOrFail($id);
+        $workpiece->fill($request->all());
+        $workpiece->save();
+        return Redirect::route('workpiece.index');
     }
 
     /**
@@ -100,8 +100,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = CompanyEloquent::findOrFail($id);
-        $company->delete();
-        return Redirect::route('company.index');
+        $workpiece = WorkpieceEloquent::findOrFail($id);
+        $workpiece->delete();
+        return Redirect::route('workpiece.index');
     }
 }

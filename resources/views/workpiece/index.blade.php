@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', '廠商')
+@section('title', '所有')
 
 @section('content')
 <div class="container">
@@ -9,33 +9,33 @@
             <h4>
                 @auth
                     <div class="float-right">
-                        <a href="{{ route('company.create') }}" class="btn btn-sm btn-success ml-2">
+                        <a href="{{ route('workpiece.create') }}" class="btn btn-sm btn-success ml-2">
                             <i class="fas fa-plus"></i>
                             <span class="pl-1">新增</span>
                         </a>
                     </div>
                 @endauth
-                    廠商
+                    工件
             </h4>
             <hr>
-            @if(count($companies) == 0)
+            @if(count($workpieces) == 0)
                 <p class="text-center">
-                    沒有任何廠商
+                    沒有任何工件         
                 </p>
             @endif
-            @foreach($companies as $company)
+            @foreach($workpieces as $workpiece)
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="container-fluid p-0">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h4 class="card-title">{{ $company->company_name }}</h4>
+                                    <h4 class="card-title">{{ $workpiece->workpiece_name }}</h4>
                                 </div>
                                 <div class="col-md-4">
                                 @auth
-                                        <form action="{{ route('company.destroy', ['id' => $company->company_id]) }}" method="POST">
+                                        <form action="{{ route('workpiece.destroy', ['id' => $workpiece->workpiece_id]) }}" method="POST">
                                             @csrf
-                                            <a href="{{ route('company.edit', ['id' => $company->company_id]) }}" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('workpiece.edit', ['id' => $workpiece->workpiece_id]) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 <span class="pl-1">編輯</span>
                                             </a>
@@ -50,17 +50,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                    @if($company->company_contact != null)
+                                    @if($workpiece->workpiece_name != null)
                                         <span class="badge ml-2">
-                                        <a href="{{ route('company.show', ['id' => $company->company_id]) }}" class="float-right card-link">
+                                        <a href="{{ route('workpiece.show', ['id' => $workpiece->workpiece_id]) }}" class="float-right card-link">
                                             詳細資料
-                                            {{ $company->company_contact }}
+                                            {{ $workpiece->workpiece_name }}
                                         </a>
                                         </span>
                                     @endif
                                 </div>
                                 <div class="col-md-4">
-                                {{ $company->created_at }}
+                                {{ $workpiece->created_at }}
                                 </div>
                             </div>
 

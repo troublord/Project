@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Company as CompanyEloquent;
 
 class HomeController extends Controller
 {
@@ -25,4 +26,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    // public function companysearch(Request $request){
+    //     if(!$request->has('keyword')){
+    //         return Redirect::back();
+    //     }
+    //     $keyword=$request->keyword;
+    //      $companies=CompanyEloquent::where('company_name','LIKE',"%$keyword%")->orderBy('company_id','DESC')->paginate(5);
+    //      return view('company.index', compact('companies'));
+        
+    //  }
 }

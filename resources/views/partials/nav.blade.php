@@ -1,13 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-shadow">
 	<div class="container">
 	    <a href="{{ route('index') }}" class="navbar-brand">申揚企業社</a>
-	    <form action="{{ route('search') }}" method="GET" class="form-inline" role="search">
-	        <input type="search" class="form-control form-control-sm mr-sm-2" name="keyword" placeholder="搜尋文章" aria-label="Search">
-	        <button type="submit" class="btn btn-sm btn-outline-info my-2 my-sm-0">
-	            <i class="fas fa-search"></i>
-	            搜尋
-	        </button>
-        </form>
+	    
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

@@ -15,6 +15,7 @@
                     @endif
 
                     <a href="{{ route('company.index') }}">廠商</a>
+                    <a href="{{ route('workpiece.index') }}">工件</a>
                 </div>
             </div>
         </div>
