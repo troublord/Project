@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Project - @yield('title')</title>
-	@include('partials.head')
+	
     <style>
         body{
             font-family: '微軟正黑體';
@@ -25,7 +25,7 @@
 	</main>
 </body>
 <footer>
-
+@include('partials.head')
 
 </footer>
 </html>
