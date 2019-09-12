@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $company->company_name)
+@section('title', $employee->employee_name)
 
 @section('content')
 <div class="row">
@@ -8,19 +8,19 @@
         <div class="row">
             <div class="col-sm-12 pb-2 mt-4 mb-2 border-bottom">
                 <div class="row">   
-                    <h1>{{ $company->company_name }}</h1>
+                    <h1>{{ $employee->employee_name }}</h1>
                     @auth
                         <div class="float-right ml-auto">
-                            <form action="{{ route('company.destroy', ['id' => $company->company_id]) }}" method="POST">
+                            <form action="{{ route('employee.destroy', ['id' => $employee->employee_id]) }}" method="POST">
                                 @csrf
-                                <a href="{{ route('company.edit', ['id' => $company->company_id]) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('employee.edit', ['id' => $employee->employee_id]) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-pencil-alt"></i>
-                                    <span class="pl-1">編輯廠商</span>
+                                    <span class="pl-1">編輯</span>
                                 </a>
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="fas fa-trash"></i>
-                                    <span class="pl-1">刪除廠商</span>
+                                    <span class="pl-1">刪除</span>
                                 </button>
                             </form>
                         </div>
@@ -28,26 +28,27 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                    <h2>{{ $company->company_id }}</h2>
+                    <h2>{{ $employee->employee_id }}</h2>
                     </div>
                     <div class="col-sm-6 text-right">
-                        {{ $company->created_at }}
+                        {{ $employee->created_at }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                   聯絡人: {{ $company->company_contact }}
+                   聯絡電話: {{ $employee->employee_phone }}
                 </div>
                 <div class="col-sm-12">
-                   電話: {{ $company->company_phone }}
+                   聯絡地址: {{ $employee->employee_address }}
                 </div>
                 <div class="col-sm-12">
-                   地址: {{ $company->company_address }}
+                   電子信箱: {{ $employee->employee_email }}
                 </div>
-                <!-- <div class="col-sm-12">
-                    聯絡人: {{ $company->content }} 沒讀到content 
-                </div> -->
+                <div class="col-sm-12">
+                   生日: {{ $employee_birth }}
+                </div>
+
             </div>
         </div>
     </div>

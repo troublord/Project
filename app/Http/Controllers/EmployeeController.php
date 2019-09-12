@@ -7,6 +7,7 @@ use Auth;
 use View;
 use Redirect;
 use App\Employee as EmployeeEloquent;
+use DateTime;
 
 class EmployeeController extends Controller
 {
@@ -67,7 +68,9 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = EmployeeEloquent::findOrFail($id);
-        return View::make('employee.show', compact('employee'));
+        $birth=  strtotime($employee->employee_birth);
+        $employee_birth=date("Y-m-d", $birth);
+        return View::make('employee.show', compact('employee','employee_birth'));
     }
 
     /**
@@ -79,8 +82,12 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         // email跟birth要轉過之後才船的過去
+        
         $employee = EmployeeEloquent::findOrFail($id);
-        return View::make('employee.edit', compact('employee'));
+        // $datestring=gettype( $employee->employee_birth); 測試birth datatype
+        $birth=  strtotime($employee->employee_birth);
+        $employee_birth=date("Y-m-d", $birth);
+        return View::make('employee.edit', compact('employee','employee_birth'));
     }
 
     /**

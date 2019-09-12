@@ -2,7 +2,7 @@
 
 @section('title', '編輯員工資料')
 
-@section('content')'employee_name', 'employee_phone', 'employee_address', 'employee_email', 'employee_birth'
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -34,22 +34,17 @@
                             <div class="form-group row">
                                 <label for="employee_email" class="col-sm-2 col-form-label-sm text-md-right">電子信箱</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="employee_email" id="employee_email" value="{{ $emoloyee->employee_email ?? '' }}">
+                                {{ $employee->employee_email }}  
+                                <!-- 因為email設為unique所以不給edit -->
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="employee_birth" class="col-sm-2 col-form-label-sm text-md-right">生日</label>
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control form-control-sm" name="employee_birth" id="employee_birth" value="{{ $emoloyee->employee_birth ?? '' }}">
+                                <input type="date" class="form-control form-control-sm" name="employee_birth" id="employee_birth" value="{{ $employee_birth ?? '' }}">
                                 </div>
                             </div>
-<!-- 
-                            <div class="form-group row">
-                                <label for="content" class="col-sm-2 col-form-label-sm text-md-right">備註</label>
-                                <div class="col-sm-8">
-                                    <textarea name="content" id="content" rows="15" class="form-control form-control-sm" style="resize: vertical; value={{ $company->company_address ?? '' }}"></textarea>
-                                </div>
-                            </div> content 讀不到 -->
+
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-sm-2">
                                     <button class="btn btn-md btn-primary">儲存</button>
