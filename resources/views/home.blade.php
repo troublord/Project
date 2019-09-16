@@ -18,6 +18,7 @@
                     <a href="{{ route('workpiece.index') }}">工件</a>
                     <a href="{{ route('employee.index') }}">員工</a>
                     <a href="{{ route('paymentrequest.index') }}">請款單</a>
+                    <a href="{{ route('produce.index') }}">生產紀錄表</a>
                 </div>
             </div>
         </div>
