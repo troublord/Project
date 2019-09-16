@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Auth;
 use View;
 use Redirect;
-use App\PaymentRequest as PaymentRequestEloquent;
+use App\Produce as ProduceEloquent;
+use App\Employee as EmployeeEloquent;
 use App\Workpiece as WorkpieceEloquent;
-use App\Company as CompanyEloquent;
+use DateTime;
 
-class PaymentRequestController extends Controller
+class ProduceController extends Controller
 {
     public function __construct()
     {
@@ -29,12 +30,11 @@ class PaymentRequestController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 這裡沒有船任何東西進來 
      */
     public function index(Request $request)
     {
-        $datas = PaymentRequestEloquent::orderBy('request_id', 'DESC')->paginate(5);
-        return View::make('paymentrequest.index', compact('datas'));
+        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(5);
+        return View::make('produce.index', compact('datas'));
     }
     /**
      * Show the form for creating a new resource.
@@ -43,9 +43,10 @@ class PaymentRequestController extends Controller
      */
     public function create()
     {
-        $companys = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        $data = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(5);
         $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        return View::make('paymentrequest.create', compact('companys','workpieces'));
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        return View::make('produce.create', compact('data','workpieces','employees'));
     }
 
     /**
@@ -56,9 +57,10 @@ class PaymentRequestController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new PaymentRequestEloquent($request->all());
+
+        $data = new ProduceEloquent($request->all());
         $data->save();
-        return Redirect::route('paymentrequest.index');
+        return Redirect::route('produce.index');
     }
 
     /**
@@ -69,10 +71,12 @@ class PaymentRequestController extends Controller
      */
     public function show($id)
     {
-        $data = PaymentRequestEloquent::findOrFail($id);
+        $data = ProduceEloquent::findOrFail($id);
         $wp = WorkpieceEloquent::findOrFail($data->workpiece_id);
-        $com = CompanyEloquent::findOrFail($data->company_id);
-        return View::make('paymentrequest.show', compact('data', 'wp', 'com'));
+        $emp = EmployeeEloquent::findOrFail($data->employee_id);
+        $date=  strtotime($data->produce_date);
+        $produce_date=date("Y-m-d", $date);
+        return View::make('produce.show', compact('data','wp','emp','produce_date'));
     }
 
     /**
@@ -83,12 +87,16 @@ class PaymentRequestController extends Controller
      */
     public function edit($id)
     {
-        $data = PaymentRequestEloquent::findOrFail($id);
-        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        $companys = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        // email跟birth要轉過之後才船的過去
+        
+        $data = ProduceEloquent::findOrFail($id);
         $wp = WorkpieceEloquent::findOrFail($data->workpiece_id);
-        $com = CompanyEloquent::findOrFail($data->company_id);
-        return View::make('paymentrequest.edit', compact('data','workpieces','companys' ,'wp', 'com'));
+        $emp = EmployeeEloquent::findOrFail($data->employee_id);
+        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        $date=  strtotime($data->produce_date);
+        $produce_date=date("Y-m-d", $date);
+        return View::make('produce.edit', compact('data','wp','emp','produce_date','workpieces','employees'));
     }
 
     /**
@@ -100,10 +108,10 @@ class PaymentRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = PaymentRequestEloquent::findOrFail($id);
+        $data = ProduceEloquent::findOrFail($id);
         $data->fill($request->all());
         $data->save();
-        return Redirect::route('paymentrequest.index');
+        return Redirect::route('produce.index');
     }
 
     /**
@@ -114,8 +122,8 @@ class PaymentRequestController extends Controller
      */
     public function destroy($id)
     {
-        $data = PaymentRequestEloquent::findOrFail($id);
+        $data = ProduceEloquent::findOrFail($id);
         $data->delete();
-        return Redirect::route('paymentrequest.index');
+        return Redirect::route('produce.index');
     }
 }

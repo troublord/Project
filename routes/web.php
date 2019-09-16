@@ -26,3 +26,8 @@ Route::get('companysearch','HomeController@companysearch');
 Route::resource('workpiece', 'WorkpieceController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('paymentrequest', 'PaymentRequestController');
+Route::resource('produce', 'ProduceController');
+Route::resource('purchase', 'PurchaseController');
+Route::resource('receipt', 'ReceiptController');
+Route::resource('shipment', 'ShipmentController');
+Route::resource('storage', 'StorageController');
