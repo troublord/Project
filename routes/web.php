@@ -25,3 +25,4 @@ Route::resource('company', 'CompanyController');
 Route::get('companysearch','HomeController@companysearch');
 Route::resource('workpiece', 'WorkpieceController');
 Route::resource('employee', 'EmployeeController');
+Route::resource('paymentrequest', 'PaymentRequestController');

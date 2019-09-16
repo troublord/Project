@@ -23,6 +23,7 @@ class WorkpieceController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 這裡沒有船任何東西進來
      */
     public function index(Request $request)
     {

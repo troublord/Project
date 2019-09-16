@@ -15,9 +15,9 @@ class Shipment extends Model
     protected $primaryKey ='shipment_id';
 
     public function company(){
-        return $this->hasOne(CompanyEloquent::class,'company_id');
+        return $this->belongsTo(CompanyEloquent::class,'company_id');
     }
     public function workpiece(){
-        return $this->hasOne(WorkpieceEloquent::class);
+        return $this->belongsTo(WorkpieceEloquent::class);
     }
 }

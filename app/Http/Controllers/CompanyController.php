@@ -37,7 +37,8 @@ class CompanyController extends Controller
     public function create()
     {
         $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
-        return View::make('company.create', compact('companies'));
+        return View::make('company.create', compact('companies'));   
+        // 這邊船什麼過去沒差  沒有什麼要顯示的
     }
 
     /**

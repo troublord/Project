@@ -15,10 +15,10 @@ class Produce extends Model
     protected $primaryKey ='produce_id';
 
     public function employee(){
-        return $this->hasOne(EmployeeEloquent::class);
+        return $this->belongsTo(EmployeeEloquent::class);
     }
     public function workpiece(){
-        return $this->hasOne(WorkpieceEloquent::class);
+        return $this->belongsTo(WorkpieceEloquent::class);
     }
 
 }

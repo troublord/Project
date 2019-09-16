@@ -17,12 +17,12 @@ class Receipt extends Model
     protected $primaryKey ='receipt_id';
 
     public function employee(){
-        return $this->hasOne(WorkpieceEloquent::class);
+        return $this->belongsTo(WorkpieceEloquent::class);
     }
     public function company(){
-        return $this->hasOne(CompanyEloquent::class,'company_id');
+        return $this->belongsTo(CompanyEloquent::class,'company_id');
     }
     public function workpiece(){
-        return $this->hasOne(WorkpieceEloquent::class);
+        return $this->belongsTo(WorkpieceEloquent::class);
     }
 }
