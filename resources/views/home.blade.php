@@ -19,6 +19,7 @@
                     <a href="{{ route('employee.index') }}">員工</a>
                     <a href="{{ route('paymentrequest.index') }}">請款單</a>
                     <a href="{{ route('produce.index') }}">生產紀錄表</a>
+                    <a href="{{ route('purchase.index') }}">採購單</a>
                 </div>
             </div>
         </div>

@@ -12,7 +12,11 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',[
+            'except' => [
+                'index', 'show'
+            ]
+        ]);
     }
     /**
      * Show the application dashboard.

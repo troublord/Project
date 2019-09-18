@@ -9,10 +9,10 @@ use App\Company as CompanyEloquent;
 class Purchase extends Model
 {
     protected $fillable = [
-        'purcahse_at', 'employee_id', 'company_id','purcahse_name','purcahse_price', 'purcahse_amount', 'purcahse_total'
+        'purchase_at', 'employee_id', 'company_id','purchase_name','purchase_price', 'purchase_amount', 'purchase_total'
     ];
     
-    protected $primaryKey ='purcahse_id';
+    protected $primaryKey ='purchase_id';
 
     public function employee(){
         return $this->belongsTo(WorkpieceEloquent::class);

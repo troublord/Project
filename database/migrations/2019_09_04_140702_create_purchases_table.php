@@ -14,14 +14,14 @@ class CreatePurchasesTable extends Migration
     public function up()
     {
         Schema::create('purchases', function (Blueprint $table) {
-            $table->bigIncrements('purcahse_id');
-            $table->dateTime('purcahse_at');
+            $table->bigIncrements('purchase_id');
+            $table->dateTime('purchase_at');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('company_id');
-            $table->string('purcahse_name');
-            $table->integer('purcahse_price');
-            $table->integer('purcahse_amount');
-            $table->integer('purcahse_total');
+            $table->string('purchase_name');
+            $table->integer('purchase_price');
+            $table->integer('purchase_amount');
+            $table->integer('purchase_total');
             $table->timestamps();
         });
     }
