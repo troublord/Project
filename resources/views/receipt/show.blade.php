@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $data->purchase_id)
+@section('title', $data->receipt_id)
 
 @section('content')
 <div class="row">
@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-sm-12 pb-2 mt-4 mb-2 border-bottom">
                 <div class="row">   
-                    <h1>{{ $data->purchase_id }}採購單</h1>
+                    <h1>{{ $data->receipt_id }}發票</h1>
                     @auth
                         <div class="float-right ml-auto">
-                            <form action="{{ route('purchase.destroy', ['id' => $data->purchase_id]) }}" method="POST">
+                            <form action="{{ route('receipt.destroy', ['id' => $data->receipt_id]) }}" method="POST">
                                 @csrf
-                                <a href="{{ route('purchase.edit', ['id' => $data->purchase_id]) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('receipt.edit', ['id' => $data->receipt_id]) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-pencil-alt"></i>
                                     <span class="pl-1">編輯</span>
                                 </a>
@@ -28,28 +28,28 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                    <h2>購買物: {{ $data->purchase_name  }}</h2>
+                    <h2>廠商: {{ $com->company_name  }}</h2>
                     </div>
                     <div class="col-sm-6 text-right">
-                        採購日期:{{ $purchase_at }}
+                        開立日期:{{ $receipt_at }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                   採購人員: {{ $emp->employee_name  }}
+                   開立人員: {{ $emp->employee_name  }}
                 </div>
                 <div class="col-sm-12">
-                   購買廠商 : {{ $com->company_name }}
+                   工件名稱 : {{ $work->workpiece_name }}
                 </div>
                 <div class="col-sm-12">
-                   單價 : {{ $data->purchase_price }}
+                   單價 : {{ $data->receipt_price }}
                 </div>
                 <div class="col-sm-12">
-                   總計 : {{ $data->purchase_amount }}
+                   數量 : {{ $data->receipt_amount }}
                 </div>
                 <div class="col-sm-12">
-                   總計 : {{ $data->purchase_total }}
+                   總計 : {{ $data->receipt_total }}
                 </div>
 
             </div>
