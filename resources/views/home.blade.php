@@ -20,6 +20,9 @@
                     <a href="{{ route('paymentrequest.index') }}">請款單</a>
                     <a href="{{ route('produce.index') }}">生產紀錄表</a>
                     <a href="{{ route('purchase.index') }}">採購單</a>
+                    <a href="{{ route('receipt.index') }}">發票</a>
+                    <a href="{{ route('shipment.index') }}">出貨單</a>
+                    <a href="{{ route('storage.index') }}">入庫單</a>
                 </div>
             </div>
         </div>
