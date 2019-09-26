@@ -22,7 +22,7 @@ class CreateProducesTable extends Migration
             $table->integer('pro_index');
             $table->integer('pro_second');
             $table->integer('pro_period');
-            $table->text('content')->nullable();
+            $table->text('content')->nullable()->change();
             $table->timestamps();
         });
     }

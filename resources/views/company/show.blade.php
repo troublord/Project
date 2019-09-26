@@ -45,9 +45,6 @@
                 <div class="col-sm-12">
                    地址: {{ $company->company_address }}
                 </div>
-                <!-- <div class="col-sm-12">
-                    聯絡人: {{ $company->content }} 沒讀到content 
-                </div> -->
             </div>
         </div>
     </div>

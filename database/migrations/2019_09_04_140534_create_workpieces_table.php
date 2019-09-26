@@ -18,7 +18,7 @@ class CreateWorkpiecesTable extends Migration
             $table->string('workpiece_name');
             $table->string('workpiece_price');
             $table->integer('workpiece_formation');
-            $table->text('content')->nullable();
+            $table->text('content')->nullable()->change();
             $table->timestamps();
         });
     }

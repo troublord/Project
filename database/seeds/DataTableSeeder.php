@@ -11,6 +11,6 @@ class DataTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->call(CompanyTableSeeder::class);
     }
 }

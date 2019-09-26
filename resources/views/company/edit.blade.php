@@ -16,34 +16,27 @@
                             <div class="form-group row">
                                 <label for="company_name" class="col-sm-2 col-form-label-sm text-md-right">公司名稱</label>
                                 <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-sm" name="company_name" id="company_name" value="{{ $company->company_name ?? '' }}">
+                                <input type="text" class="form-control form-control-sm" name="company_name" id="company_name" value="{{ $company->company_name ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="company_contact" class="col-sm-2 col-form-label-sm text-md-right">公司聯絡人</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="company_contact" id="company_contact" value="{{ $company->company_contact ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm" name="company_contact" id="company_contact" value="{{ $company->company_contact ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="company_phone" class="col-sm-2 col-form-label-sm text-md-right">公司電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="company_phone" id="company_phone" value="{{ $company->company_phone ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm" name="company_phone" id="company_phone" value="{{ $company->company_phone ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="company_address" class="col-sm-2 col-form-label-sm text-md-right">公司地址</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="company_address" id="company_address" value="{{ $company->company_address ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm" name="company_address" id="company_address" value="{{ $company->company_address ?? '' }}" required>
                                 </div>
                             </div>
-<!-- 
-                            <div class="form-group row">
-                                <label for="content" class="col-sm-2 col-form-label-sm text-md-right">備註</label>
-                                <div class="col-sm-8">
-                                    <textarea name="content" id="content" rows="15" class="form-control form-control-sm" style="resize: vertical; value={{ $company->company_address ?? '' }}"></textarea>
-                                </div>
-                            </div> content 讀不到 -->
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-sm-2">
                                     <button class="btn btn-md btn-primary">儲存</button>

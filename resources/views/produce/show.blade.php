@@ -48,6 +48,9 @@
                 <div class="col-sm-12">
                    總加工天數 : {{ $data->pro_period }}
                 </div>
+                <div class="col-sm-12">
+                   備註 : {{ $data->content }}
+                </div>
 
             </div>
         </div>

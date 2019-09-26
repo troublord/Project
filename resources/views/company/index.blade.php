@@ -74,6 +74,13 @@
 
 
     </div>
+    <div class="row pt-2">
+        <div class="col-md-8">
+
+                {{ $companies->render() }}
+
+        </div>
+    </div>
 
 </div>
 
