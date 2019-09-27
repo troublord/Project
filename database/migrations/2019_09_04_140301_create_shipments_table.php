@@ -18,6 +18,7 @@ class CreateShipmentsTable extends Migration
             $table->dateTime('shipment_at');
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('workpiece_id');
+            $table->unsignedInteger('storage_id');
             $table->integer('shipment_amount');
             $table->timestamps();
         });

@@ -9,6 +9,7 @@ use Redirect;
 use App\Shipment as ShipmentEloquent;
 use App\Workpiece as WorkpieceEloquent;
 use App\Company as CompanyEloquent;
+use App\Storage as StorageEloquent;
 use DateTime;
 
 class shipmentController extends Controller
@@ -44,9 +45,10 @@ class shipmentController extends Controller
     public function create()
     {
         $data = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate(5);
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(10);
         $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        return View::make('shipment.create', compact('data','companies','workpieces'));
+        $storages = StorageEloquent::orderBy('storage_id', 'DESC')->paginate(5);
+        return View::make('shipment.create', compact('data','companies','workpieces','storages'));
     }
 
     /**
@@ -59,6 +61,9 @@ class shipmentController extends Controller
     {
 
         $data = new ShipmentEloquent($request->all());
+        $total=StorageEloquent::findOrFail($request->storage_id);
+        $total->storage_total=$total->storage_total-$request->shipment_amount;
+        $total->save();
         $data->save();
         return Redirect::route('shipment.index');
     }
@@ -92,7 +97,7 @@ class shipmentController extends Controller
         $data = ShipmentEloquent::findOrFail($id);
         $com = CompanyEloquent::findOrFail($data->company_id);
         $work = WorkpieceEloquent::findOrFail($data->workpiece_id);
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(10);
         $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
         $date=  strtotime($data->shipment_at);
         $shipment_at=date("Y-m-d", $date);

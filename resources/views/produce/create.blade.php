@@ -52,7 +52,7 @@
                                 <label for="produce_date" class="col-sm-2 col-form-label-sm text-md-right">生產日期</label>
                                 <div class="col-sm-8">
                                     <div class='input-group datepicker' data-provide="datepicker" id='produce_date'>
-                                    <input type='date' class="datepicker form-control {{ $errors->has('produce_date') ? ' is-invalid' : '' }}" name="produce_date" id="produce_date" />
+                                    <input type='date' class="datepicker form-control {{ $errors->has('produce_date') ? ' is-invalid' : '' }}" name="produce_date" id="produce_date" required/>
 
                                     </div>
                                     @if ($errors->has('produce_date'))
@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <label for="com_index" class="col-sm-2 col-form-label-sm text-md-right">電腦指數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('com_index') ? ' is-invalid' : '' }}" name="com_index" id="com_index">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('com_index') ? ' is-invalid' : '' }}" name="com_index" id="com_index" required>
                                     @if ($errors->has('com_index'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('com_index') }}</strong>
@@ -76,7 +76,7 @@
                             <div class="form-group row">
                                 <label for="pro_index" class="col-sm-2 col-form-label-sm text-md-right">加工指數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_index') ? ' is-invalid' : '' }}" name="pro_index" id="pro_index">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_index') ? ' is-invalid' : '' }}" name="pro_index" id="pro_index" required>
                                     @if ($errors->has('pro_index'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('pro_index') }}</strong>
@@ -87,7 +87,7 @@
                             <div class="form-group row">
                                 <label for="pro_second" class="col-sm-2 col-form-label-sm text-md-right">加工秒數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_second') ? ' is-invalid' : '' }}" name="pro_second" id="pro_second">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_second') ? ' is-invalid' : '' }}" name="pro_second" id="pro_second" required>
                                     @if ($errors->has('pro_second'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('pro_second') }}</strong>
@@ -98,7 +98,7 @@
                             <div class="form-group row">
                                 <label for="pro_period" class="col-sm-2 col-form-label-sm text-md-right">總加工天數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_period') ? ' is-invalid' : '' }}" name="pro_period" id="pro_period">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('pro_period') ? ' is-invalid' : '' }}" name="pro_period" id="pro_period" required>
                                     @if ($errors->has('pro_period'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('pro_period') }}</strong>

@@ -16,19 +16,19 @@
                             <div class="form-group row">
                                 <label for="employee_name" class="col-sm-2 col-form-label-sm text-md-right">名稱</label>
                                 <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-sm" name="employee_name" id="employee_name" value="{{ $employee->employee_name ?? '' }}">
+                                <input type="text" class="form-control form-control-sm" name="employee_name" id="employee_name" value="{{ $employee->employee_name ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="employee_phone" class="col-sm-2 col-form-label-sm text-md-right">聯絡電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="employee_phone" id="employee_phone" value="{{ $employee->employee_phone ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm" name="employee_phone" id="employee_phone" value="{{ $employee->employee_phone ?? '' }}" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="employee_address" class="col-sm-2 col-form-label-sm text-md-right">聯絡地址</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" name="employee_address" id="employee_address" value="{{ $employee->employee_address ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm" name="employee_address" id="employee_address" value="{{ $employee->employee_address ?? '' }}" required >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <label for="employee_birth" class="col-sm-2 col-form-label-sm text-md-right">生日</label>
                                 <div class="col-sm-8">
-                                <input type="date" class="form-control form-control-sm" name="employee_birth" id="employee_birth" value="{{ $employee_birth ?? '' }}">
+                                <input type="date" class="form-control form-control-sm" name="employee_birth" id="employee_birth" value="{{ $employee_birth ?? '' }}" required>
                                 </div>
                             </div>
 

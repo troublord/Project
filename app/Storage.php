@@ -9,7 +9,7 @@ use App\Workpiece as WorkpieceEloquent;
 class Storage extends Model
 {
     protected $fillable = [
-        'storage_at', 'employee_id','workpiece_id','storage_amount', 'storage_total'
+        'storage_at', 'employee_id','workpiece_id','storage_amount'
     ];
     
     protected $primaryKey ='storage_id';
@@ -21,4 +21,5 @@ class Storage extends Model
     public function workpiece(){
         return $this->belongsTo(WorkpieceEloquent::class);
     }
+    
 }

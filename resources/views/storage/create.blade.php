@@ -48,7 +48,7 @@
                                 <label for="employee_id" class="col-sm-2 col-form-label-sm text-md-right">填寫人員</label>
                                 <div class="col-sm-8">
                                     <select name="employee_id" id="employee_id" class="form-control form-control-sm {{ $errors->has('employee_id') ? ' is-invalid' : '' }}">
-                                        <option value="0">請選擇廠商</option>
+                                        <option value="0">請選擇員工</option>
                                         @foreach($employees as $employee)
                                             <option value="{{ $employee->employee_id }}">
                                                 {{ $employee->employee_name }}

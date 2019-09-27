@@ -19,6 +19,7 @@ class CreateStoragesTable extends Migration
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('workpiece_id');
             $table->integer('storage_amount');
+            $table->integer('storage_total');
             $table->timestamps();
         });
     }

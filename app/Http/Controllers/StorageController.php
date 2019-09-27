@@ -59,6 +59,8 @@ class storageController extends Controller
     {
 
         $data = new StorageEloquent($request->all());
+        $total = StorageEloquent::where('workpiece_id',$data->workpiece_id)->get()->sum('storage_amount');
+        $data->storage_total=$request->storage_amount;
         $data->save();
         return Redirect::route('storage.index');
     }
@@ -71,10 +73,11 @@ class storageController extends Controller
      */
     public function show($id)
     {
+        
         $data = StorageEloquent::findOrFail($id);
+        $total = StorageEloquent::where('workpiece_id',$data->workpiece_id)->get()->sum('storage_total');
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
         $work = WorkpieceEloquent::findOrFail($data->workpiece_id);
-        $total = StorageEloquent::where('workpiece_id',$data->workpiece_id)->get()->sum('storage_amount');
         $date=  strtotime($data->storage_at);
         $storage_at=date("Y-m-d", $date);
         return View::make('storage.show', compact('data','emp','work','storage_at','total'));

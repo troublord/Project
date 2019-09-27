@@ -16,13 +16,13 @@
                             <div class="form-group row">
                                 <label for="purchase_at" class="col-sm-2 col-form-label-sm text-md-right">購買日期</label>
                                 <div class="col-sm-8">
-                                <input type="date" class="form-control form-control-sm" name="purchase_at" id="purchase_at" value="{{ $purchase_at ?? '' }}">
+                                <input type="date" class="form-control form-control-sm" name="purchase_at" id="purchase_at" value="{{ $purchase_at ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="employee_id" class="col-sm-2 col-form-label-sm text-md-right">採購人員</label>
                                 <div class="col-sm-8">
-                                    <select name="employee_id" id="employee_id" class="form-control form-control-sm {{ $errors->has('employee_id') ? ' is-invalid' : '' }}">
+                                    <select name="employee_id" id="employee_id" class="form-control form-control-sm {{ $errors->has('employee_id') ? ' is-invalid' : '' }}" required>
                                         <option value="{{ $emp->employee_id }}">{{ $emp->employee_name }}</option>
                                         @foreach($employees as $employee)
                                             <option value="{{ $employee->employee_id }}">
@@ -40,7 +40,7 @@
                             <div class="form-group row">
                                 <label for="company_id" class="col-sm-2 col-form-label-sm text-md-right">購買廠商</label>
                                 <div class="col-sm-8">
-                                    <select name="company_id" id="company_id" class="form-control form-control-sm {{ $errors->has('company_id') ? ' is-invalid' : '' }}">
+                                    <select name="company_id" id="company_id" class="form-control form-control-sm {{ $errors->has('company_id') ? ' is-invalid' : '' }}" required>
                                         <option value="{{ $emp->employee_id }}">{{ $com->company_name }}</option>
                                         @foreach($companies as $company)
                                             <option value="{{ $company->company_id }}">
@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <label for="purchase_name" class="col-sm-2 col-form-label-sm text-md-right">購買物</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_name') ? ' is-invalid' : '' }}" name="purchase_name" id="purchase_name" value="{{ $data->purchase_name ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_name') ? ' is-invalid' : '' }}" name="purchase_name" id="purchase_name" value="{{ $data->purchase_name ?? '' }}" required>
                                     @if ($errors->has('purchase_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_name') }}</strong>
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label for="purchase_price" class="col-sm-2 col-form-label-sm text-md-right">購買單價<</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_price') ? ' is-invalid' : '' }}" name="purchase_price" id="purchase_price" value="{{ $data->purchase_price ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_price') ? ' is-invalid' : '' }}" name="purchase_price" id="purchase_price" value="{{ $data->purchase_price ?? '' }}" required>
                                     @if ($errors->has('purchase_price'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_price') }}</strong>
@@ -81,7 +81,7 @@
                             <div class="form-group row">
                                 <label for="purchase_amount" class="col-sm-2 col-form-label-sm text-md-right">購買數量</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_amount') ? ' is-invalid' : '' }}" name="purchase_amount" id="purchase_amount" value="{{ $data->purchase_amount ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_amount') ? ' is-invalid' : '' }}" name="purchase_amount" id="purchase_amount" value="{{ $data->purchase_amount ?? '' }}" required>
                                     @if ($errors->has('purchase_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_amount') }}</strong>
@@ -92,7 +92,7 @@
                             <div class="form-group row">
                                 <label for="purchase_total" class="col-sm-2 col-form-label-sm text-md-right">總計</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_total') ? ' is-invalid' : '' }}" name="purchase_total" id="purchase_total" value="{{ $data->purchase_total ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_total') ? ' is-invalid' : '' }}" name="purchase_total" id="purchase_total" value="{{ $data->purchase_total ?? '' }}" required>
                                     @if ($errors->has('purchase_total'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_total') }}</strong>

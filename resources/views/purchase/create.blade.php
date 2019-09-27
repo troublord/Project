@@ -76,7 +76,7 @@
                             <div class="form-group row">
                                 <label for="purchase_price" class="col-sm-2 col-form-label-sm text-md-right">購買單價</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_price') ? ' is-invalid' : '' }}" name="purchase_price" id="purchase_price">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_price') ? ' is-invalid' : '' }}" name="purchase_price" id="purchase_price" required>
                                     @if ($errors->has('purchase_price'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_price') }}</strong>
@@ -87,7 +87,7 @@
                             <div class="form-group row">
                                 <label for="purchase_amount" class="col-sm-2 col-form-label-sm text-md-right">購買數量</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_amount') ? ' is-invalid' : '' }}" name="purchase_amount" id="purchase_amount">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_amount') ? ' is-invalid' : '' }}" name="purchase_amount" id="purchase_amount" required>
                                     @if ($errors->has('purchase_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_amount') }}</strong>
@@ -98,7 +98,7 @@
                             <div class="form-group row">
                                 <label for="purchase_total" class="col-sm-2 col-form-label-sm text-md-right">總計</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_total') ? ' is-invalid' : '' }}" name="purchase_total" id="purchase_total">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('purchase_total') ? ' is-invalid' : '' }}" name="purchase_total" id="purchase_total" required> 
                                     @if ($errors->has('purchase_total'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('purchase_total') }}</strong>
