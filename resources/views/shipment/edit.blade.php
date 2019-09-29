@@ -16,13 +16,13 @@
                             <div class="form-group row">
                                 <label for="shipment_at" class="col-sm-2 col-form-label-sm text-md-right">出貨日期</label>
                                 <div class="col-sm-8">
-                                <input type="date" class="form-control form-control-sm" name="shipment_at" id="shipment_at" value="{{ $shipment_at ?? '' }}">
+                                <input type="date" class="form-control form-control-sm" name="shipment_at" id="shipment_at" value="{{ $shipment_at ?? '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="workpiece_id" class="col-sm-2 col-form-label-sm text-md-right">運送工件</label>
                                 <div class="col-sm-8">
-                                    <select name="workpiece_id" id="workpiece_id" class="form-control form-control-sm {{ $errors->has('workpiece_id') ? ' is-invalid' : '' }}">
+                                    <select name="workpiece_id" id="workpiece_id" class="form-control form-control-sm {{ $errors->has('workpiece_id') ? ' is-invalid' : '' }}" required>
                                         <option value="{{ $work->workpiece_id }}">{{ $work->workpiece_name }}</option>
                                         @foreach($workpieces as $workpiece)
                                             <option value="{{ $workpiece->workpiece_id }}">
@@ -40,7 +40,7 @@
                             <div class="form-group row">
                                 <label for="company_id" class="col-sm-2 col-form-label-sm text-md-right">出貨廠商</label>
                                 <div class="col-sm-8">
-                                    <select name="company_id" id="company_id" class="form-control form-control-sm {{ $errors->has('company_id') ? ' is-invalid' : '' }}">
+                                    <select name="company_id" id="company_id" class="form-control form-control-sm {{ $errors->has('company_id') ? ' is-invalid' : '' }}" required>
                                         <option value="{{ $com->company_id }}">{{ $com->company_name }}</option>
                                         @foreach($companies as $company)
                                             <option value="{{ $company->company_id }}">
@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <label for="shipment_amount" class="col-sm-2 col-form-label-sm text-md-right">運送數量</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('shipment_amount') ? ' is-invalid' : '' }}" name="shipment_amount" id="shipment_amount" value="{{ $data->shipment_amount ?? '' }}">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('shipment_amount') ? ' is-invalid' : '' }}" name="shipment_amount" id="shipment_amount" value="{{ $data->shipment_amount ?? '' }}" required>
                                     @if ($errors->has('shipment_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('shipment_amount') }}</strong>

@@ -15,7 +15,7 @@
                             <div class="form-group row">
                                 <label for="workpiece_name" class="col-sm-2 col-form-label-sm text-md-right">工件名稱</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_name') ? ' is-invalid' : '' }}" name="workpiece_name" id="workpiece_name">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_name') ? ' is-invalid' : '' }}" name="workpiece_name" id="workpiece_name" required>
                                     @if ($errors->has('workpiece_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('workpiece_name') }}</strong>
@@ -26,7 +26,7 @@
                             <div class="form-group row">
                                 <label for="workpiece_price" class="col-sm-2 col-form-label-sm text-md-right">工件價格</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_price') ? ' is-invalid' : '' }}" name="workpiece_price" id="workpiece_price">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_price') ? ' is-invalid' : '' }}" name="workpiece_price" id="workpiece_price" required>
                                     @if ($errors->has('workpiece_price'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('workpiece_price') }}</strong>
@@ -37,22 +37,10 @@
                             <div class="form-group row">
                                 <label for="workpiece_formation" class="col-sm-2 col-form-label-sm text-md-right">工件工數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_formation') ? ' is-invalid' : '' }}" name="workpiece_formation" id="workpiece_formation">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('workpiece_formation') ? ' is-invalid' : '' }}" name="workpiece_formation" id="workpiece_formation" required>
                                     @if ($errors->has('workpiece_formation'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('workpiece_formation') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="content" class="col-sm-2 col-form-label-sm text-md-right">備註</label>
-                                <div class="col-sm-8">
-                                    <textarea name="content" id="content" rows="15" class="form-control form-control-sm {{ $errors->has('content') ? ' is-invalid' : '' }}" style="resize: vertical;"></textarea>
-                                    @if ($errors->has('content'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('content') }}</strong>
                                         </span>
                                     @endif
                                 </div>

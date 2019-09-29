@@ -15,6 +15,8 @@
 // });
 
  Route::get('/', 'HomeController@index')->name('index');
+ Route::get('/post_type', 'HomeController@index')->name('index');
+ Route::get('/post', 'HomeController@index')->name('index');
 
   Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
   Route::post('login', 'Auth\LoginController@login');
@@ -33,3 +35,6 @@ Route::resource('purchase', 'PurchaseController');
 Route::resource('receipt', 'ReceiptController');
 Route::resource('shipment', 'ShipmentController');
 Route::resource('storage', 'StorageController');
+Route::resource('post', 'PostController');
+Route::resource('post_type', 'PostTypeController', ['except' => ['index']]);
+

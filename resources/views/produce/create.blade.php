@@ -15,7 +15,7 @@
                             <div class="form-group row">
                                 <label for="employee_id" class="col-sm-2 col-form-label-sm text-md-right">生產員工</label>
                                 <div class="col-sm-8">
-                                    <select name="employee_id" id="employee_id" class="form-control form-control-sm {{ $errors->has('employee_id') ? ' is-invalid' : '' }}">
+                                    <select name="employee_id" id="employee_id" class="form-control form-control-sm {{ $errors->has('employee_id') ? ' is-invalid' : '' }}" required>
                                         <option value="0">請選擇員工</option>
                                         @foreach($employees as $employee)
                                             <option value="{{ $employee->employee_id }}">
@@ -33,7 +33,7 @@
                             <div class="form-group row">
                                 <label for="company_id" class="col-sm-2 col-form-label-sm text-md-right">生產工件</label>
                                 <div class="col-sm-8">
-                                    <select name="workpiece_id" id="workpiece_id" class="form-control form-control-sm {{ $errors->has('workpiece_id') ? ' is-invalid' : '' }}">
+                                    <select name="workpiece_id" id="workpiece_id" class="form-control form-control-sm {{ $errors->has('workpiece_id') ? ' is-invalid' : '' }}" required>
                                         <option value="0">請選擇工件</option>
                                         @foreach($workpieces as $workpiece)
                                             <option value="{{ $workpiece->workpiece_id }}">
