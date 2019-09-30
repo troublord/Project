@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Customer;
 
 class DataTableSeeder extends Seeder
 {
@@ -12,9 +11,6 @@ class DataTableSeeder extends Seeder
      */
     public function run()
     {
-        Customer::table('customers')->insert([
-            'customer_id'=>str_random()
-        ]);
+        $this->call(CompanyTableSeeder::class);
     }
 }
-///UNDONE BUSINESS

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>申楊企業社</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,21 +24,28 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    申揚企業社
                 </a>
+                <a class="nav-link" href="{{ route('company.index') }}">廠商</a>
+                <a class="nav-link" href="{{ route('workpiece.index') }}">工件</a>
+                <a class="nav-link" href="{{ route('employee.index') }}">員工</a>
+                <a class="nav-link" href="{{ route('paymentrequest.index') }}">請款單</a>
+                <a class="nav-link" href="{{ route('produce.index') }}">生產紀錄表</a>
+                <a class="nav-link" href="{{ route('purchase.index') }}">採購單</a>
+                <a class="nav-link" href="{{ route('receipt.index') }}">發票</a>
+                <a class="nav-link" href="{{ route('shipment.index') }}">出貨單</a>
+                <a class="nav-link" href="{{ route('storage.index') }}">入庫單</a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
