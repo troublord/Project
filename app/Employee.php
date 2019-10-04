@@ -12,7 +12,7 @@ use App\Purchase as PurchaseEloquent;
 class Employee extends Model
 {
     protected $fillable = [
-		'employee_name', 'employee_phone', 'employee_address', 'employee_email', 'employee_birth'
+		'employee_name', 'employee_phone', 'employee_address', 'employee_email', 'employee_birth','total_index'
     ];
     
     protected $primaryKey ='employee_id';

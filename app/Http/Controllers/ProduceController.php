@@ -11,7 +11,8 @@ use App\Employee as EmployeeEloquent;
 use App\Workpiece as WorkpieceEloquent;
 use DateTime;
 
-class ProduceController extends Controller
+
+class ProduceController extends Controller 
 {
     public function __construct()
     {
@@ -34,7 +35,10 @@ class ProduceController extends Controller
     public function index(Request $request)
     {
         $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(5);
-        return View::make('produce.index', compact('datas'));
+        $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate(5);
+
+
+        return View::make('produce.index', compact('datas','employees'));
     }
     /**
      * Show the form for creating a new resource.
@@ -59,6 +63,10 @@ class ProduceController extends Controller
     {
 
         $data = new ProduceEloquent($request->all());
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        $emp = EmployeeEloquent::findOrFail($data->employee_id);
+        $emp->total_index=$emp->total_index+$request->pro_index;
+        $emp->save();
         $data->save();
         return Redirect::route('produce.index');
     }

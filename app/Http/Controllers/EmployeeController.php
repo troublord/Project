@@ -55,6 +55,7 @@ class EmployeeController extends Controller
     {
 
         $employee = new EmployeeEloquent($request->all());
+        $employee->total_index=0;
         $employee->save();
         return Redirect::route('employee.index');
     }
