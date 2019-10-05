@@ -20,6 +20,7 @@ class CreateStoragesTable extends Migration
             $table->unsignedInteger('workpiece_id');
             $table->integer('storage_amount');
             $table->integer('storage_total');
+            $table->boolean('finished');
             $table->timestamps();
         });
     }

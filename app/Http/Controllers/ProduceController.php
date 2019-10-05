@@ -9,6 +9,7 @@ use Redirect;
 use App\Produce as ProduceEloquent;
 use App\Employee as EmployeeEloquent;
 use App\Workpiece as WorkpieceEloquent;
+use App\Storage as StorageEloquent;
 use DateTime;
 
 
@@ -68,7 +69,10 @@ class ProduceController extends Controller
         $emp->total_index=$emp->total_index+$request->pro_index;
         $emp->save();
         $data->save();
+        $storage_page=new StorageController();
+        $storage_page->createfin($data);
         return Redirect::route('produce.index');
+
     }
 
     /**
@@ -117,6 +121,10 @@ class ProduceController extends Controller
     public function update(Request $request, $id)
     {
         $data = ProduceEloquent::findOrFail($id);
+        $emp = EmployeeEloquent::findOrFail($data->employee_id);
+        $sumindex=ProduceEloquent::where('emplopyee_id',$data->employee_id)->sum('pro_index');
+        $emp->total_index=$sumindex;
+        $emp->save();
         $data->fill($request->all());
         $data->save();
         return Redirect::route('produce.index');

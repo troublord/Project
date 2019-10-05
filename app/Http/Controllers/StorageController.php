@@ -9,6 +9,7 @@ use Redirect;
 use App\Storage as StorageEloquent;
 use App\Workpiece as WorkpieceEloquent;
 use App\Employee as EmployeeEloquent;
+use App\Produce as ProduceEloquent;
 use DateTime;
 
 class storageController extends Controller
@@ -59,10 +60,21 @@ class storageController extends Controller
     {
 
         $data = new StorageEloquent($request->all());
-        $total = StorageEloquent::where('workpiece_id',$data->workpiece_id)->get()->sum('storage_amount');
         $data->storage_total=$request->storage_amount;
         $data->save();
         return Redirect::route('storage.index');
+    }
+    public function createfin($request)
+    {
+        $data = new StorageEloquent;
+        $data->storage_at=$request->produce_date;
+        $data->employee_id=$request->employee_id;
+        $data->workpiece_id=$request->workpiece_id;
+        $data->storage_amount=$request->pro_index;
+        $data->finished=TRUE;
+        $data->storage_total=$data->storage_amount;
+        $data->save();
+
     }
 
     /**
