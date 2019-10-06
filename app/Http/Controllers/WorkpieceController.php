@@ -54,6 +54,7 @@ class WorkpieceController extends Controller
     public function store(Request $request)
     {
         $workpiece = new WorkpieceEloquent($request->all());
+        $workpiece->in_stock=0;
         $workpiece->save();
         return Redirect::route('workpiece.index');
     }

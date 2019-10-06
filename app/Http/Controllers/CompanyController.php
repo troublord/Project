@@ -7,6 +7,7 @@ use Auth;
 use View;
 use Redirect;
 use App\Company as CompanyEloquent;
+use App\Receipt as ReceiptEloquent;
 
 class CompanyController extends Controller
 {
@@ -30,8 +31,9 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
-        return View::make('company.index', compact('companies'));
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->get();
+        $receipts=ReceiptEloquent::groupBy('company_id')->selectRaw('sum(receipt_total) as sum, company_id')->orderBy('sum', 'desc')->get();
+        return View::make('company.index', compact('companies','receipts'));
     }
     /**
      * Show the form for creating a new resource.

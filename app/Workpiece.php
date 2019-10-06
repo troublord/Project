@@ -12,7 +12,7 @@ use App\Storage as StorageEloquent;
 class Workpiece extends Model
 {
     protected $fillable = [
-		'workpiece_name', 'workpiece_price', 'workpiece_formation', 'content	'
+		'workpiece_name', 'workpiece_price', 'workpiece_formation', 'content	','in_stock'
     ];
     protected $primaryKey ='workpiece_id';
 

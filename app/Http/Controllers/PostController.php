@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post as PostEloquent;
 use App\PostType as PostTypeEloquent;
 use Carbon\Carbon;
+use App\Receipt as ReceiptEloquent;
 use Auth;
 use View;
 use Redirect;
@@ -30,7 +31,8 @@ class PostController extends Controller
     {
         $posts = PostEloquent::orderBy('created_at', 'DESC')->paginate(5);
         $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
-        return View::make('home', compact('posts','post_types'));
+        
+        return View::make('home', compact('posts','post_types','receipts'));
     }
 
     /**
@@ -58,6 +60,15 @@ class PostController extends Controller
         $posts = PostEloquent::orderBy('created_at', 'DESC')->paginate(5);
         $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
         return View::make('home', compact('posts','post_types'));
+    }
+    public function alert()
+    {
+        $post = new PostEloquent;
+        $post->user_id = Auth::user()->id;
+        $post->title="存量不足";
+        $post->type=7;
+        $post->content="可供銷售工件不足需要生產";
+        $post->save();
     }
 
     /**

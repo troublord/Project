@@ -47,7 +47,7 @@ class shipmentController extends Controller
         $data = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate(5);
         $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(10);
         $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        $storages = StorageEloquent::orderBy('storage_id', 'DESC')->paginate(5);
+        $storages = StorageEloquent::where('finished',TRUE)->orderBy('storage_id', 'DESC')->paginate(5);
         return View::make('shipment.create', compact('data','companies','workpieces','storages'));
     }
 
@@ -60,11 +60,25 @@ class shipmentController extends Controller
     public function store(Request $request)
     {
 
+        $workpieces = WorkpieceEloquent::findOrFail($request->workpiece_id);
         $data = new ShipmentEloquent($request->all());
-        $total=StorageEloquent::findOrFail($request->storage_id);
-        $total->storage_total=$total->storage_total-$request->shipment_amount;
-        $total->save();
+        $storage=StorageEloquent::findOrFail($request->storage_id);
+        $storage->delete();
+        $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');
+        $workpieces->in_stock=$Finished;
         $data->save();
+        $workpieces->save();
+
+        if($Finished>0 && $Finished < 100){
+            $alert=new PostController();
+            $alert->alert();
+        }
+        // $Unfinished= StorageEloquent::where('finished',FALSE)->sum('storage_total');
+
+
+
+
+
         return Redirect::route('shipment.index');
     }
 

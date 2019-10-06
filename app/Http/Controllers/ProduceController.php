@@ -62,7 +62,11 @@ class ProduceController extends Controller
      */
     public function store(Request $request)
     {
-
+        $Unfinished=StorageEloquent::where('finished','FALSE')->where('workpiece_id', $request->workpiece_id)->sum('storage_total');
+        if($Unfinished < $request->pro_index){
+            return Redirect::route('produce.index');
+        }
+        else{
         $data = new ProduceEloquent($request->all());
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
@@ -71,7 +75,9 @@ class ProduceController extends Controller
         $data->save();
         $storage_page=new StorageController();
         $storage_page->createfin($data);
+        }
         return Redirect::route('produce.index');
+
 
     }
 
@@ -122,8 +128,9 @@ class ProduceController extends Controller
     {
         $data = ProduceEloquent::findOrFail($id);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
-        $sumindex=ProduceEloquent::where('emplopyee_id',$data->employee_id)->sum('pro_index');
+        $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');
         $emp->total_index=$sumindex;
+
         $emp->save();
         $data->fill($request->all());
         $data->save();

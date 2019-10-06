@@ -18,6 +18,7 @@ class CreateWorkpiecesTable extends Migration
             $table->string('workpiece_name');
             $table->string('workpiece_price');
             $table->integer('workpiece_formation');
+            $table->integer('in_stock');
             $table->text('content')->nullable()->change();
             $table->timestamps();
         });

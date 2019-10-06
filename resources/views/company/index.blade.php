@@ -29,7 +29,8 @@
                         <div class="container-fluid p-0">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h4 class="card-title">{{ $company->company_name }}</h4>
+                                    <h4 class="card-title">{{ $company->company_name}}</h4>
+                                    <h4 >{{$company->company_id}}</h4>
                                 </div>
                                 <div class="col-md-4">
                                 @auth
@@ -69,17 +70,26 @@
                 </div>
             @endforeach
         </div>
-        
+        <div class="col-md-4">
+            <div class="list-group">
+                <a href="{{ route('company.index') }}" class=" list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    廠商銷售排行
+                    <span class="badge badge-secondary badge-pill">廠商數{{ count($companies) }}</span>
+                </a>
+                @foreach ($receipts as $a)
+                    <a href="{{ route('company.show', ['id' => $a->company_id]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        {{ $a->company_id }}
+                        <span class="badge badge-secondary badge-pill">
+                            {{ $a->sum }}
+                        </span>
+                    </a>
+                @endforeach
 
-
-
+            </div>
     </div>
-    <div class="row pt-2">
-        <div class="col-md-8">
 
-                {{ $companies->render() }}
 
-        </div>
+
     </div>
 
 </div>
