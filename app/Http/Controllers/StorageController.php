@@ -140,7 +140,9 @@ class storageController extends Controller
         
         $data = StorageEloquent::findOrFail($id);
         $data->fill($request->all());
+        $data->storage_total=$data->storage_amount;
         $data->save();
+        
 
         $work = WorkpieceEloquent::findOrFail($data->workpiece_id);
         $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');

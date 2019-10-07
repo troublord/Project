@@ -42,6 +42,9 @@
                 <div class="col-sm-12">
                    工數: {{ $workpiece->workpiece_formation }}
                 </div>
+                <div class="col-sm-12">
+                   庫存數量: {{ $workpiece->in_stock }}
+                </div>
                 <!-- <div class="col-sm-12">
                    備註: {{ $workpiece->content }}
                 </div>  -->

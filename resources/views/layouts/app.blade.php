@@ -26,15 +26,37 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     申揚企業社
                 </a>
-                <a class="nav-link" href="{{ route('company.index') }}">廠商</a>
-                <a class="nav-link" href="{{ route('workpiece.index') }}">工件</a>
-                <a class="nav-link" href="{{ route('employee.index') }}">員工</a>
-                <a class="nav-link" href="{{ route('paymentrequest.index') }}">請款單</a>
-                <a class="nav-link" href="{{ route('produce.index') }}">生產紀錄表</a>
-                <a class="nav-link" href="{{ route('purchase.index') }}">採購單</a>
-                <a class="nav-link" href="{{ route('receipt.index') }}">發票</a>
-                <a class="nav-link" href="{{ route('shipment.index') }}">出貨單</a>
-                <a class="nav-link" href="{{ route('storage.index') }}">入庫單</a>
+                <div class="dropdown">
+                   <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   基本資料
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{{ route('company.index') }}">廠商</a>
+                      <a class="dropdown-item" href="{{ route('workpiece.index') }}">工件</a>
+                      <a class="dropdown-item" href="{{ route('employee.index') }}">員工</a>
+                   </div>
+                </div>
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   庫存管理
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{{ route('storage.index') }}">入庫單</a>
+                      <a class="dropdown-item" href="{{ route('produce.index') }}">生產紀錄表</a>
+                      <a class="dropdown-item" href="{{ route('shipment.index') }}">出貨單</a>
+                   </div>
+                </div>
+                <div class="dropdown">
+                   <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   金流管理
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{{ route('purchase.index') }}">採購單</a>
+                      <a class="dropdown-item" href="{{ route('paymentrequest.index') }}">請款單</a>
+                      <a class="dropdown-item" href="{{ route('receipt.index') }}">發票</a>
+                   </div>
+                </div>
+
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

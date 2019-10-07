@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', '新增文章')
+@section('title', '新增公告')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card">
-                <div class="card-header">新增文章</div>
+                <div class="card-header">新增公告</div>
                 <div class="card-body">
                     <div class="container-fluid">
                         <form action="{{ route('post.store') }}" method="POST" class="mt-2">

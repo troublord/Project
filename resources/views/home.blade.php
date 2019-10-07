@@ -81,12 +81,12 @@
                                             @csrf
                                             <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-pencil-alt"></i>
-                                                <span class="pl-1">編輯文章</span>
+                                                <span class="pl-1">編輯公告</span>
                                             </a>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-trash"></i>
-                                                <span class="pl-1">刪除文章</span>
+                                                <span class="pl-1">刪除公告</span>
                                             </button>
                                         </form>
                                     @endauth
