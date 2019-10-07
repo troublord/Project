@@ -7,6 +7,7 @@ use App\Post as PostEloquent;
 use App\PostType as PostTypeEloquent;
 use Carbon\Carbon;
 use App\Receipt as ReceiptEloquent;
+use App\Workpiece as WorkpieceEloquent;
 use Auth;
 use View;
 use Redirect;
@@ -61,13 +62,14 @@ class PostController extends Controller
         $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
         return View::make('home', compact('posts','post_types'));
     }
-    public function alert()
+    public function alert($workpiece_id)
     {
+        $workpiece= WorkpieceEloquent::findOrFail($workpiece_id);
         $post = new PostEloquent;
         $post->user_id = Auth::user()->id;
-        $post->title="存量不足";
+        $post->title=$workpiece->workpiece_name."可供銷售工件不足需要生產";
         $post->type=7;
-        $post->content="可供銷售工件不足需要生產";
+        $post->content="可出貨工件剩下".$workpiece->in_stock;
         $post->save();
     }
 

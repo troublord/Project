@@ -43,7 +43,10 @@
                    入庫量 : {{ $data->storage_amount }}
                 </div>
                 <div class="col-sm-12">
-                   該工件庫存量 : {{ $Unfinished }}
+                   未完成量 : {{ $Unfinished }}
+                </div>
+                <div class="col-sm-12">
+                   已完成量 : {{ $Finished }}
                 </div>
 
             </div>

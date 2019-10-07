@@ -62,19 +62,20 @@ class shipmentController extends Controller
 
         $workpieces = WorkpieceEloquent::findOrFail($request->workpiece_id);
         $data = new ShipmentEloquent($request->all());
-        $storage=StorageEloquent::findOrFail($request->storage_id);
-        $storage->delete();
+        $storage=StorageEloquent::findOrFail($request->storage_id)->sum('storage_total');
         $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');
-        $workpieces->in_stock=$Finished;
+        $totalupdate=StorageEloquent::findOrFail($request->storage_id);
+        $totalupdate->storage_total=$totalupdate->storage_total-$request->shipment_amount;
+        $workpieces->in_stock=$Finished-$request->shipment_amount;
         $data->save();
         $workpieces->save();
+        $totalupdate->save();
 
-        if($Finished>0 && $Finished < 100){
-            $alert=new PostController();
-            $alert->alert();
-        }
         // $Unfinished= StorageEloquent::where('finished',FALSE)->sum('storage_total');
-
+        if($workpieces->in_stock>0 && $workpieces->in_stock < 100){
+            $alert=new PostController();
+            $alert->alert($request->workpiece_id);
+        }
 
 
 
