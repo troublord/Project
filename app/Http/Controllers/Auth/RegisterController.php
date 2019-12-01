@@ -51,7 +51,18 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'confirmed'],
+        ],
+        [   
+            'name.required'    => '需要填寫欄位',
+            'name.string'      => '需為字串',
+            'email.required'   => '需要填寫欄位',
+            'email.string'     => '格式錯誤',
+            'email.email'      => '需為電子郵件格式',
+            'email.unique'     => '已經有相同電子郵件',
+            'password.required'     => '需要填寫欄位',
+            'password.string'     => '需要包含英文字母',
+            'password.confirmed'     => '確認密碼錯誤',
         ]);
     }
 
