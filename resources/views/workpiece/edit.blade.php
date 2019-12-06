@@ -31,6 +31,12 @@
                                     <input type="text" class="form-control form-control-sm" name="workpiece_formation" id="workpiece_formation" value="{{ $workpiece->workpiece_formation ?? '' }}" required>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="safety" class="col-sm-2 col-form-label-sm text-md-right">安全庫存量</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" name="safety" id="safety" value="{{ $workpiece->safety ?? '' }}" required>
+                                </div>
+                            </div>
 
 
                             <!-- <div class="form-group row">

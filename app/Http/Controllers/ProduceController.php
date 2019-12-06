@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 use View;
 use Redirect;
@@ -57,16 +58,36 @@ class ProduceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request produce_date 	com_index pro_index pro_second 	pro_period
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $Unfinished=StorageEloquent::where('finished','FALSE')->where('workpiece_id', $request->workpiece_id)->sum('storage_total');
-        if($Unfinished < $request->pro_index){
-            return Redirect::route('produce.index');
+        $validate = Validator::make($request->all(), [
+            'produce_date'=>'before:tomorrow',
+            'com_index'=>'numeric',
+            'pro_index'=>'numeric',
+            'pro_second'=>'numeric',
+            'pro_period'=>'numeric',
+        ],[
+            'produce_date.before'    => '超過今日日期',
+            'com_index.numeric'      => '需為數字',
+            'pro_index.numeric'      => '需為數字',
+            'pro_second.numeric'      => '需為數字',
+            'pro_period.numeric'      => '需為數字',
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
         }
-        else{
+
+
+        $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
+        if($workpiece->unfinished < $request->pro_index){//輸入的完成數量大於可以完成的數量的情況
+            return redirect()->back()->with('message', '產量輸入錯誤');//沒跳出來
+        }
         $data = new ProduceEloquent($request->all());
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
@@ -75,7 +96,7 @@ class ProduceController extends Controller
         $data->save();
         $storage_page=new StorageController();
         $storage_page->createfin($data);
-        }
+        
         return Redirect::route('produce.index');
 
 

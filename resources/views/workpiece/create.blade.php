@@ -46,6 +46,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="safety" class="col-sm-2 col-form-label-sm text-md-right">安全庫存</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm {{ $errors->has('safety') ? ' is-invalid' : '' }}" name="safety" id="safety" required>
+                                    @if ($errors->has('safety'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('safety') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-sm-10 offset-sm-2">
                                     <button class="btn btn-md btn-primary">儲存</button>
                                 </div>

@@ -32,7 +32,7 @@ class PostController extends Controller
     {
         $posts = PostEloquent::orderBy('created_at', 'DESC')->paginate(5);
         $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
-        
+
         return View::make('home', compact('posts','post_types','receipts'));
     }
 
@@ -69,7 +69,7 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->title=$workpiece->workpiece_name."可供銷售工件不足需要生產";
         $post->type=7;
-        $post->content="可出貨工件剩下".$workpiece->in_stock;
+        $post->content="可出貨工件剩下".$workpiece->finished;
         $post->save();
     }
 

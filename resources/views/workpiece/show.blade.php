@@ -43,7 +43,13 @@
                    工數: {{ $workpiece->workpiece_formation }}
                 </div>
                 <div class="col-sm-12">
-                   庫存數量: {{ $workpiece->in_stock }}
+                   庫存中完成數量: {{ $workpiece->finished }}
+                </div>
+                <div class="col-sm-12">
+                   庫存中未完成數量: {{ $workpiece->unfinished }}
+                </div>
+                <div class="col-sm-12">
+                   設定之安全庫存: {{ $workpiece->safety }}
                 </div>
                 <!-- <div class="col-sm-12">
                    備註: {{ $workpiece->content }}

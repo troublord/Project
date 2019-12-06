@@ -44,32 +44,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="storage_id" class="col-sm-2 col-form-label-sm text-md-right">運送單據</label>
-                                <div class="col-sm-8">
-                                    <select name="storage_id" id="storage_id" class="form-control form-control-sm {{ $errors->has('storage_id') ? ' is-invalid' : '' }}" required>
-                                        @if(count($storages)>0)
-                                        <option value="0">請選擇入庫單</option>
-                                        @foreach($storages as $storage)
-                                            <option value="{{ $storage->storage_id }}">
-                                                {{ $storage->storage_id }}
-                                            </option>
-                                        @endforeach
-                                        @else
-                                            <option value="{{ 0 }}">
-                                                 沒有完成品 
-                                            </option>
-                                        @endif
-
-                                    
-                                    </select>
-                                    @if ($errors->has('workpiece_id'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('workpiece_id') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
+                            
                             <div class="form-group row">
                                 <label for="company_id" class="col-sm-2 col-form-label-sm text-md-right">出貨廠商</label>
                                 <div class="col-sm-8">

@@ -47,8 +47,8 @@ class shipmentController extends Controller
         $data = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate(5);
         $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(10);
         $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        $storages = StorageEloquent::where('finished',TRUE)->orderBy('storage_id', 'DESC')->paginate(5);
-        return View::make('shipment.create', compact('data','companies','workpieces','storages'));
+
+        return View::make('shipment.create', compact('data','companies','workpieces'));
     }
 
     /**
@@ -60,22 +60,25 @@ class shipmentController extends Controller
     public function store(Request $request)
     {
 
-        $workpieces = WorkpieceEloquent::findOrFail($request->workpiece_id);
+        $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
         $data = new ShipmentEloquent($request->all());
-        $storage=StorageEloquent::findOrFail($request->storage_id)->sum('storage_total');
-        $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');
-        $totalupdate=StorageEloquent::findOrFail($request->storage_id);
-        $totalupdate->storage_total=$totalupdate->storage_total-$request->shipment_amount;
-        $workpieces->in_stock=$Finished-$request->shipment_amount;
-        $data->save();
-        $workpieces->save();
-        $totalupdate->save();
+        $RTstat=0;
 
-        // $Unfinished= StorageEloquent::where('finished',FALSE)->sum('storage_total');
-        if($workpieces->in_stock>0 && $workpieces->in_stock < 100){
-            $alert=new PostController();
-            $alert->alert($request->workpiece_id);
+        if($workpiece->finished>=$request->shipment_amount){//出貨的數量需要小於可以送出的數量
+            $workpiece->finished=$workpiece->finished-$request->shipment_amount;
+            $RTstat=$workpiece->finished;
+        }else {
+            return redirect()->back()->with('message', '出貨數量輸入錯誤');
         }
+
+        $data->save();
+        
+
+         if($RTstat<=$workpiece->safety){
+             $alert=new PostController();
+             $alert->alert($request->workpiece_id);
+         }
+         $workpiece->save();
 
 
 

@@ -60,8 +60,10 @@ class storageController extends Controller
     {
 
         $data = new StorageEloquent($request->all());
-        $data->finished=FALSE;
-        $data->storage_total=$data->storage_amount;
+        $workpiece=WorkpieceEloquent::findOrFail($request->workpiece_id);
+        $data->status=FALSE;
+        $workpiece->unfinished=$workpiece->unfinished+$data->storage_amount;
+        $workpiece->save();
         $data->save();
         return Redirect::route('storage.index');
     }
@@ -72,17 +74,13 @@ class storageController extends Controller
         $data->storage_at=$request->produce_date;
         $data->employee_id=$request->employee_id;
         $data->workpiece_id=$request->workpiece_id;
-        $data->storage_total=$request->pro_index;
+        $data->status=TRUE;
         $data->storage_amount=$request->pro_index;
-        $data->finished=TRUE;
-
-        $update=StorageEloquent::where('finished',FALSE)->where('workpiece_id',$data->workpiece_id)->orderBy('storage_id')->firstOrFail();
-        $update->storage_total=$update->storage_total-$request->pro_index;
-        $update->save();
         $data->save();
 
-        $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');
-        $workpieces->in_stock=$Finished;
+        
+        $workpieces->unfinished=$workpieces->unfinished-$request->pro_index;
+        $workpieces->finished=$workpieces->finished+$request->pro_index;
 
         $workpieces->save();
     }
@@ -102,16 +100,8 @@ class storageController extends Controller
         $work = WorkpieceEloquent::findOrFail($data->workpiece_id);
         $date=  strtotime($data->storage_at);
         $storage_at=date("Y-m-d", $date);
-        $Finished=0;
-        $Unfinished=0;
-        if($data->finished){
-            $Finished= $data->storage_total;
-            $Unfinished=StorageEloquent::where('finished',FALSE)->where('workpiece_id',$data->workpiece_id)->sum('storage_total');
-        }else
-        {
-            $Unfinished= $data->storage_total;
-        }
-        return View::make('storage.show', compact('data','emp','work','storage_at','Finished','Unfinished'));
+
+        return View::make('storage.show', compact('data','emp','work','storage_at'));
     }
 
     /**
@@ -145,14 +135,18 @@ class storageController extends Controller
     {
         
         $data = StorageEloquent::findOrFail($id);
+        $dif=$request->storage_amount-$data->storage_amount;
         $data->fill($request->all());
-        $data->storage_total=$data->storage_amount;
         $data->save();
-        
 
         $work = WorkpieceEloquent::findOrFail($data->workpiece_id);
-        $Finished= StorageEloquent::where('finished',TRUE)->sum('storage_total');
-        $work->in_stock=$Finished;
+        if ($data->status) {
+            $work->finished=$work->finished+$dif;
+        }
+        else {
+            $work->unfinished=$work->unfinished+$dif;
+        }
+
         $work->save();
 
         return Redirect::route('storage.index');
@@ -167,8 +161,9 @@ class storageController extends Controller
     public function destroy($id)
     {
         $data = StorageEloquent::findOrFail($id);
-        $data->delete();
-
+        
+            $data->delete();
+    
         
         return Redirect::route('storage.index');
     }

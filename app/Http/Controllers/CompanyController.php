@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 use View;
 use Redirect;
@@ -55,6 +56,26 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = Validator::make($request->all(), [
+            'company_name'=>'required|string',
+            'company_contact'=>'required|string|max:10',
+            'company_phone'=>'required|numeric',
+            'company_address'=>'required|string',
+        ],[
+            'company_name.required'    => '需要填寫欄位',
+            'company_name.string'      => '需為字串',
+            'company_contact.max'   => '超過10個字元',
+            'company_contact.string'     => '格式錯誤',
+            'company_phone.numeric'      => '需為數字',
+            'company_address.string'     => '需要為字串',
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
+
         $company = new CompanyEloquent($request->all());
         $company->save();
         return Redirect::route('company.index');
