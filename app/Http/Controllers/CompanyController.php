@@ -36,6 +36,15 @@ class CompanyController extends Controller
         $receipts=ReceiptEloquent::groupBy('company_id')->selectRaw('sum(receipt_total) as sum, company_id')->orderBy('sum', 'desc')->get();
         return View::make('company.index', compact('companies','receipts'));
     }
+    public function search(Request $name)
+    {
+        $cname=$name->name;
+        $companies = CompanyEloquent::where('company_name','like',"%$cname%")->orderBy('company_id', 'DESC')->get();
+        $receipts=ReceiptEloquent::groupBy('company_id')->selectRaw('sum(receipt_total) as sum, company_id')->orderBy('sum', 'desc')->get();
+        return View::make('company.index', compact('companies','receipts','cname'));
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *

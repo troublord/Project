@@ -86,7 +86,7 @@ class ProduceController extends Controller
 
         $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
         if($workpiece->unfinished < $request->pro_index){//輸入的完成數量大於可以完成的數量的情況
-            return redirect()->back()->with('message', '產量輸入錯誤');//沒跳出來
+            return redirect()->back()->withErrors(['加工指數輸入錯誤', '輸入錯誤']);//沒跳出來
         }
         $data = new ProduceEloquent($request->all());
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
@@ -151,6 +151,11 @@ class ProduceController extends Controller
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
         $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');
         $emp->total_index=$sumindex;
+
+        $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
+        if($workpiece->unfinished < $request->pro_index){//輸入的完成數量大於可以完成的數量的情況
+            return redirect()->back()->withErrors(['加工指數輸入錯誤', '輸入錯誤']);//沒跳出來
+        }
 
         $emp->save();
         $data->fill($request->all());

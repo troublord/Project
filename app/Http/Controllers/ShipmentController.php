@@ -68,7 +68,7 @@ class shipmentController extends Controller
             $workpiece->finished=$workpiece->finished-$request->shipment_amount;
             $RTstat=$workpiece->finished;
         }else {
-            return redirect()->back()->with('message', '出貨數量輸入錯誤');
+            return redirect()->back()->withErrors(['出貨數量輸入錯誤', '輸入錯誤']);
         }
 
         $data->save();

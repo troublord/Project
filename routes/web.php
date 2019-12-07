@@ -25,8 +25,8 @@
   Route::post('register', 'Auth\RegisterController@register');
   // Auth::routes();
 
+Route::get('/company/search','CompanyController@search')->name('company.search');
 Route::resource('company', 'CompanyController');
-Route::get('companysearch','HomeController@companysearch');
 Route::resource('workpiece', 'WorkpieceController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('paymentrequest', 'PaymentRequestController');

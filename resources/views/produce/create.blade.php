@@ -6,6 +6,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
+        <h2>
+        @if ($errors->any())
+                <strong>{{ $errors->first() }}</strong>
+        @endif
+        </h2>
             <div class="card">
                 <div class="card-header">新增生產紀錄表</div>
                 <div class="card-body">
