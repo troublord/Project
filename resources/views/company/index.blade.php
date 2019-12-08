@@ -8,8 +8,8 @@
     <div class="col-md-8">
     <form action="{{ route('company.search') }}" method="GET">
         <div class="md-form mt-12">
-        <input class="form-control" type="text" placeholder="搜尋廠商名稱" aria-label="Search" name="name">
         <button class="btn btn-md btn-primary">搜尋</button>
+        <input class="form-control" type="text" placeholder="搜尋廠商名稱" aria-label="Search" name="name">
         </div>
     </form>
     </div>

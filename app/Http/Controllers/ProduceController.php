@@ -147,6 +147,26 @@ class ProduceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), [
+            'produce_date'=>'before:tomorrow',
+            'com_index'=>'numeric',
+            'pro_index'=>'numeric',
+            'pro_second'=>'numeric',
+            'pro_period'=>'numeric',
+        ],[
+            'produce_date.before'    => '超過今日日期',
+            'com_index.numeric'      => '需為數字',
+            'pro_index.numeric'      => '需為數字',
+            'pro_second.numeric'      => '需為數字',
+            'pro_period.numeric'      => '需為數字',
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
+
         $data = ProduceEloquent::findOrFail($id);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
         $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');

@@ -59,6 +59,19 @@ class storageController extends Controller
     public function store(Request $request)
     {
 
+        $validate = Validator::make($request->all(), [
+            'storage_amount'=>'numeric',
+        ],[
+            'storage_amount.numeric'    => '格式需為數字',
+            
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
+
         $data = new StorageEloquent($request->all());
         $workpiece=WorkpieceEloquent::findOrFail($request->workpiece_id);
         $data->status=FALSE;
@@ -133,6 +146,18 @@ class storageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), [
+            'storage_amount'=>'numeric',
+        ],[
+            'storage_amount.numeric'    => '格式需為數字',
+            
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
         
         $data = StorageEloquent::findOrFail($id);
         $dif=$request->storage_amount-$data->storage_amount;
@@ -162,7 +187,7 @@ class storageController extends Controller
     {
         $data = StorageEloquent::findOrFail($id);
         
-            $data->delete();
+        $data->delete();
     
         
         return Redirect::route('storage.index');

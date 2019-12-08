@@ -123,6 +123,25 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), [
+            'company_name'=>'required|string',
+            'company_contact'=>'required|string|max:10',
+            'company_phone'=>'required|numeric',
+            'company_address'=>'required|string',
+        ],[
+            'company_name.required'    => '需要填寫欄位',
+            'company_name.string'      => '需為字串',
+            'company_contact.max'   => '超過10個字元',
+            'company_contact.string'     => '格式錯誤',
+            'company_phone.numeric'      => '需為數字',
+            'company_address.string'     => '需要為字串',
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
         $company = CompanyEloquent::findOrFail($id);
         $company->fill($request->all());
         $company->save();

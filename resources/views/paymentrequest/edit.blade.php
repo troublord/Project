@@ -35,7 +35,7 @@
                                 <label for="company_id" class="col-sm-2 col-form-label-sm text-md-right">工件名稱</label>
                                 <div class="col-sm-8">
                                     <select name="workpiece_id" id="workpiece_id" class="form-control form-control-sm {{ $errors->has('workpiece_id') ? ' is-invalid' : '' }}">
-                                        <option value="{{ $wp>workpiece_id }}">{{ $wp->workpiece_name }}</option>
+                                        <option value="{{ $wp->workpiece_id }}">{{ $wp->workpiece_name }}</option>
                                         @foreach($workpieces as $workpiece)
                                             <option value="{{ $workpiece->workpiece_id }}">
                                                 {{ $workpiece->workpiece_name }}

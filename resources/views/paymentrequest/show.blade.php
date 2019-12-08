@@ -28,7 +28,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                    <h2>{{ $com->company_name }}</h2>
+                    <h2>公司名稱:{{ $com->company_name }}</h2>
                     </div>
                     <div class="col-sm-6 text-right">
                         {{ $data->created_at }}

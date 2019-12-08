@@ -59,6 +59,19 @@ class shipmentController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = Validator::make($request->all(), [
+            'shipment_amount'=>'numeric',
+            
+        ],[
+            'shipment_amount.numeric'    => '需為數字',
+            
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
 
         $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
         $data = new ShipmentEloquent($request->all());
