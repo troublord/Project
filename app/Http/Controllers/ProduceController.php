@@ -36,11 +36,29 @@ class ProduceController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(5);
-        $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate(5);
+        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate();
+        $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
 
 
         return View::make('produce.index', compact('datas','employees'));
+    }
+    public function search(Request $id)
+    {
+        $wid=$id->id;
+        $datas = ProduceEloquent::where('workpiece_id',$wid)->orderBy('produce_id', 'DESC')->get();
+        $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
+        return View::make('produce.index', compact('datas','employees','id'));
+
+
+    }
+    public function search_emp(Request $id)
+    {
+        $eid=$id->id;
+        $datas = ProduceEloquent::where('employee_id',$eid)->orderBy('produce_id', 'DESC')->get();
+        $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
+        return View::make('produce.index', compact('datas','employees','id'));
+
+
     }
     /**
      * Show the form for creating a new resource.
@@ -49,9 +67,9 @@ class ProduceController extends Controller
      */
     public function create()
     {
-        $data = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(5);
-        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        $data = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate();
+        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate();
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate();
         return View::make('produce.create', compact('data','workpieces','employees'));
     }
 
@@ -131,8 +149,8 @@ class ProduceController extends Controller
         $data = ProduceEloquent::findOrFail($id);
         $wp = WorkpieceEloquent::findOrFail($data->workpiece_id);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
-        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate(5);
-        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        $workpieces = WorkpieceEloquent::orderBy('workpiece_id', 'DESC')->paginate();
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate();
         $date=  strtotime($data->produce_date);
         $produce_date=date("Y-m-d", $date);
         return View::make('produce.edit', compact('data','wp','emp','produce_date','workpieces','employees'));

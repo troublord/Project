@@ -32,7 +32,8 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
-        return View::make('employee.index', compact('employees'));
+        $list = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate(5);
+        return View::make('employee.index', compact('employees','list'));
     }
     /**
      * Show the form for creating a new resource.

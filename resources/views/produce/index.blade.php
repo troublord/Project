@@ -5,7 +5,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
+        <form action="{{ route('produce.search') }}" method="GET">
+
             <h4>
                 @auth
                     <div class="float-right">
@@ -17,73 +19,87 @@
                 @endauth
                 生產紀錄表
             </h4>
+            <div class="md-form mt-12">
+                <input class="form-control" type="text" placeholder="搜尋工件ID" aria-label="Search" name="id">
+                <button class="btn btn-md btn-primary">搜尋</button>
+            </div>
+        </form>
             <hr>
             @if(count($datas) == 0)
                 <p class="text-center">
                     沒有資料 
                 </p>
             @endif
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">生產單號</th>
+                  <th scope="col">員工ID</th>
+                  <th scope="col">工件ID</th>
+                  <th scope="col">產量</th>
+                  <th scope="col">電腦指數</th>
+                  <th scope="col">加工指數</th>
+                  <th scope="col">加工秒數</th>
+                  <th scope="col">加工時間</th>
+                  <th scope="col">功能</th>
+                  <th scope="col">生產日期</th>
+                </tr>
+            </thead>
+            <tbody>
             @foreach($datas as $data)
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="container-fluid p-0">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <h4 class="card-title">紀錄表號{{ $data->produce_id }}</h4>
-                                </div>
-                                <div class="col-md-4">
-                                @auth
-                                        <form action="{{ route('produce.destroy', ['id' => $data->produce_id]) }}" method="POST">
-                                            @csrf
-                                            <a href="{{ route('produce.edit', ['id' => $data->produce_id]) }}" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <span class="pl-1">編輯</span>
-                                            </a>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                                <span class="pl-1">刪除</span>
-                                            </button>
-                                        </form>
-                                    @endauth
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                        <span class="badge ml-2">
-                                        <a href="{{ route('produce.show', ['id' => $data->produce_id]) }}" class="float-right card-link">
-                                            詳細資料
-                                        </a>
-                                        </span>
-                                </div>
-                                <div class="col-md-4">
-                                {{ $data->created_at }}
-                                </div>
-                            </div>
+                    <tr>
+                        <th scope="row">{{ $data->produce_id }}</th>
+                        <td>
+                        {{ $data->employee_id }}
+                        </td>
+                        <td>
+                        {{ $data->workpiece_id }}
+                        </td>
+                        <td>
+                        {{ $data->com_index }}
+                        </td>
+                        <td>
+                        {{ $data->pro_index }}
+                        </td>
+                        <td>
+                        {{ $data->pro_index }}
+                        </td>
+                        <td>
+                        {{ $data->pro_index }}
+                        </td>
+                        <td>
+                        {{ $data->pro_index }}
+                        </td>
+                        <td>
+                        @auth
+                            <form action="{{ route('produce.destroy', ['id' => $data->produce_id]) }}" method="POST">
+                                @csrf
+                                <a href="{{ route('produce.edit', ['id' => $data->produce_id]) }}" class="btn btn-sm btn-primary">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  <span class="pl-1">編輯</span>
+                                </a>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    <span class="pl-1">刪除</span>
+                                </button>
+                            
 
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                        <td>
+                        <a href="{{ route('produce.show', ['id' => $data->produce_id]) }}" class="float-right card-link">
+                        {{ $data->created_at }}
+                        </a>
+                        </td>
+                    </tr>
+                </form>
+                @endauth
+
+               
             @endforeach
+            </tbody>
+            </talbe>
         </div>
-        <div class="col-md-4">
-            <div class="list-group">
-                <a href="{{ route('produce.index') }}" class=" list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    員工生產排行
-                    <span class="badge badge-secondary badge-pill">員工數{{ count($employees) }}</span>
-                </a>
-                @foreach ($employees as $a)
-                    <a href="{{ route('employee.show', ['id' => $a->employee_id]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        {{ $a->employee_name }}
-                        <span class="badge badge-secondary badge-pill">
-                            {{ $a->total_index }}
-                        </span>
-                    </a>
-                @endforeach
-
-            </div>
-        </div>
-                
        
 
 

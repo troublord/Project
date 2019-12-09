@@ -30,6 +30,8 @@ Route::resource('company', 'CompanyController');
 Route::resource('workpiece', 'WorkpieceController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('paymentrequest', 'PaymentRequestController');
+Route::get('/produce/search','ProduceController@search')->name('produce.search');
+Route::get('/produce/search_emp','ProduceController@search_emp')->name('produce.search_emp');
 Route::resource('produce', 'ProduceController');
 Route::resource('purchase', 'PurchaseController');
 Route::resource('receipt', 'ReceiptController');
