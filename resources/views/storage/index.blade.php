@@ -7,6 +7,7 @@
 
     <div class="row">
         <div class="col-md-12">
+        <form action="{{ route('storage.search') }}" method="GET">
             <h4>
                 @auth
                     <div class="float-right">
@@ -14,10 +15,15 @@
                             <i class="fas fa-plus"></i>
                             <span class="pl-1">新增</span>
                         </a>
+                        <button class="btn btn-md btn-primary">搜尋</button>
                     </div>
                 @endauth
                 入庫單
             </h4>
+        <div class="md-form mt-12">
+        <input class="form-control" type="text" placeholder="搜尋工件ID" aria-label="Search" name="id">
+        </div>
+        </form>
             <hr>
             @if(count($datas) == 0)
                 <p class="text-center">
@@ -51,7 +57,11 @@
                         {{ $data->storage_amount }}
                         </td>
                         <td>
-                        {{ $data->status }}
+                        @if($data->status)
+                        完成品
+                        @else
+                        原料
+                        @endif
                         </td>
                         <td>
                         @auth

@@ -35,9 +35,11 @@ class shipmentController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate(5);
+        $datas = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate();
         return View::make('shipment.index', compact('datas'));
     }
+
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -35,8 +35,17 @@ class storageController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = StorageEloquent::orderBy('storage_id', 'DESC')->paginate(5);
-        return View::make('storage.index', compact('datas','Finished','Unfinished'));
+        $datas = StorageEloquent::orderBy('storage_id', 'DESC')->paginate();
+        return View::make('storage.index', compact('datas'));
+    }
+
+    public function search(Request $id)
+    {
+        $wid=$id->id;
+        $datas = StorageEloquent::where('workpiece_id',$wid)->orderBy('storage_id', 'DESC')->get();
+        return View::make('storage.index', compact('datas'));
+
+
     }
     /**
      * Show the form for creating a new resource.

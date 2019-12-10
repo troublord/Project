@@ -15,13 +15,13 @@
                             <i class="fas fa-plus"></i>
                             <span class="pl-1">新增</span>
                         </a>
+                        <button class="btn btn-md btn-primary">搜尋</button>
                     </div>
                 @endauth
                 生產紀錄表
             </h4>
             <div class="md-form mt-12">
                 <input class="form-control" type="text" placeholder="搜尋工件ID" aria-label="Search" name="id">
-                <button class="btn btn-md btn-primary">搜尋</button>
             </div>
         </form>
             <hr>

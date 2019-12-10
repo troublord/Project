@@ -36,6 +36,7 @@ Route::resource('produce', 'ProduceController');
 Route::resource('purchase', 'PurchaseController');
 Route::resource('receipt', 'ReceiptController');
 Route::resource('shipment', 'ShipmentController');
+Route::get('/storage/search','StorageController@search')->name('storage.search');
 Route::resource('storage', 'StorageController');
 Route::resource('post', 'PostController');
 Route::resource('post_type', 'PostTypeController', ['except' => ['index']]);
