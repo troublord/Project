@@ -10,6 +10,8 @@
         <div class="col-md-8">
         <form action="{{ route('company.search') }}" method="GET">
             <h4>
+            廠商
+            <button class="btn btn-md btn-primary">搜尋</button>
                 @auth
                     <div class="float-right">
                         <a href="{{ route('company.create') }}" class="btn btn-sm btn-success ml-2">
@@ -18,12 +20,11 @@
                         </a>
                     </div>
                 @endauth
-                    廠商
+                
             </h4>
 
         <div class="md-form mt-12">
         <input class="form-control" type="text" placeholder="搜尋廠商名稱" aria-label="Search" name="name">
-        <button class="btn btn-md btn-primary">搜尋</button>
         </div>
         </form>
             <hr>
