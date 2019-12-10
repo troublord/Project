@@ -110,6 +110,7 @@ class ProduceController extends Controller
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
         $emp->total_index=$emp->total_index+$request->pro_index;
+        $emp->total_hours=$emp->total_hours+$request->pro_period;
         $emp->save();
         $data->save();
         $storage_page=new StorageController();
@@ -187,17 +188,21 @@ class ProduceController extends Controller
 
         $data = ProduceEloquent::findOrFail($id);
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
-        $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');
-        $emp->total_index=$sumindex;
+        ;
 
         $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
         if($workpiece->unfinished < $request->pro_index){//輸入的完成數量大於可以完成的數量的情況
             return redirect()->back()->withErrors(['加工指數輸入錯誤', '輸入錯誤']);//沒跳出來
         }
 
-        $emp->save();
         $data->fill($request->all());
         $data->save();
+
+        $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');
+        $sumhours=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_period');
+        $emp->total_index=$sumindex;
+        $emp->total_hours=$sumhours;
+        $emp->save();
         return Redirect::route('produce.index');
     }
 
@@ -211,6 +216,13 @@ class ProduceController extends Controller
     {
         $data = ProduceEloquent::findOrFail($id);
         $data->delete();
+        $sumindex=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_index');
+        $sumhours=ProduceEloquent::where('employee_id',$data->employee_id)->sum('pro_period');
+        $emp = EmployeeEloquent::findOrFail($data->employee_id);
+        $emp->total_index=$sumindex;
+        $emp->total_hours=$sumhours;
+        $emp->save();
+
         return Redirect::route('produce.index');
     }
 }

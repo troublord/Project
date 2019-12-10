@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_address');
             $table->dateTime('employee_birth');
             $table->integer('total_index');
+            $table->integer('total_hours');
             $table->timestamps();
         });
     }

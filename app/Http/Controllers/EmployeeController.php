@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use DB;
 use Auth;
 use View;
 use Redirect;
 use App\Employee as EmployeeEloquent;
+use App\Produce as ProduceEloquent;
 use DateTime;
 
 class EmployeeController extends Controller
@@ -31,9 +34,11 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+        
         $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
-        $list = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate(5);
-        return View::make('employee.index', compact('employees','list'));
+
+        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate();
+        return View::make('employee.index', compact('employees'));
     }
     /**
      * Show the form for creating a new resource.
@@ -57,6 +62,7 @@ class EmployeeController extends Controller
 
         $employee = new EmployeeEloquent($request->all());
         $employee->total_index=0;
+        $employee->total_hours=0;
         $employee->save();
         return Redirect::route('employee.index');
     }

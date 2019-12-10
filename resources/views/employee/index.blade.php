@@ -70,14 +70,19 @@
         <div class="col-md-4">
             <div class="list-group">
                 <a href="{{ route('produce.index') }}" class=" list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    員工生產排行
-                    <span class="badge badge-secondary badge-pill">員工數{{ count($list) }}</span>
+                    員工生產效率等級
+                    <span class="badge badge-secondary badge-pill">員工數{{ count($employees) }}</span>
                 </a>
-                @foreach ($list as $a)
-                    <a href="{{ route('produce.search_emp', ['id' => $a->employee_id]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        {{ $a->employee_name }}
+                @foreach ($employees as $employee)
+        
+                    <a href="{{ route('produce.search_emp', ['id' => $employee->employee_id]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        {{ $employee->employee_name}}
                         <span class="badge badge-secondary badge-pill">
-                            {{ $a->total_index }}
+                            @if ($employee->total_hours != 0)
+                                {{round($employee->total_index/$employee->total_hours)}}
+                            @else
+                            0
+                            @endif
                         </span>
                     </a>
                 @endforeach

@@ -36,7 +36,6 @@
                   <th scope="col">生產單號</th>
                   <th scope="col">員工ID</th>
                   <th scope="col">工件ID</th>
-                  <th scope="col">產量</th>
                   <th scope="col">電腦指數</th>
                   <th scope="col">加工指數</th>
                   <th scope="col">加工秒數</th>
@@ -62,14 +61,12 @@
                         {{ $data->pro_index }}
                         </td>
                         <td>
-                        {{ $data->pro_index }}
+                        {{ $data->pro_second }}
                         </td>
                         <td>
-                        {{ $data->pro_index }}
+                        {{ $data->pro_period }}
                         </td>
-                        <td>
-                        {{ $data->pro_index }}
-                        </td>
+
                         <td>
                         @auth
                             <form action="{{ route('produce.destroy', ['id' => $data->produce_id]) }}" method="POST">

@@ -46,7 +46,7 @@
                    加工秒數 : {{ $data->pro_second }}
                 </div>
                 <div class="col-sm-12">
-                   總加工天數 : {{ $data->pro_period }}
+                   總加工時間 : {{ $data->pro_period }}
                 </div>
                 <div class="col-sm-12">
                    備註 : {{ $data->content }}

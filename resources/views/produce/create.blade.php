@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="pro_period" class="col-sm-2 col-form-label-sm text-md-right">總加工天數</label>
+                                <label for="pro_period" class="col-sm-2 col-form-label-sm text-md-right">總加工時間</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control form-control-sm {{ $errors->has('pro_period') ? ' is-invalid' : '' }}" name="pro_period" id="pro_period" required>
                                     @if ($errors->has('pro_period'))
