@@ -165,17 +165,22 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+        $payment = new PaymentRequestController();
+        $payment_gid=PaymentRequestEloquent::where('company_id',$id)->get();
+        foreach ($payment_gid as $data) {
+            $payment->destroy($data->request_id);
+        }
+        $shipment=new ShipmentController();
+        $shipment_gid= ShipmentEloquent::where('company_id',$id)->get();
+        foreach ($shipment_gid as $data) {
+            $shipment->destroy($data->shipment_id);
+        }
+        $purchase=new PurchaseController();
+        $purchase_gid= PurchaseEloquent::where('company_id',$id)->get();
+        foreach ($purchase_gid as $data) {
+            $purchase->destroy($data->purchase_id);
+        }
 
-
-        $payment = PaymentRequestEloquent::where('company_id',$id)->find();
-        $shipment = ShipmentEloquent::where('company_id',$id)->find();
-        $storage = StorageRequestEloquent::where('company_id',$id)->find();
-        $purchase = PurchaseEloquent::where('company_id',$id)->find();
-
-        $payment->delete();
-        $shipment->delete();
-        $storage->delete();
-        $purchase->delete();
         $company = CompanyEloquent::findOrFail($id);
         $company->delete();
         return Redirect::route('company.index');

@@ -58,7 +58,7 @@ class ProduceController extends Controller
     public function search_emp(Request $id)
     {
         $eid=$id->id;
-        $datas = ProduceEloquent::where('employee_id',$eid)->orderBy('produce_id', 'DESC')->get();
+        $datas = ProduceEloquent::where('employee_id',$eid)->orderBy('produce_id', 'DESC')->paginate(10);
         $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
         return View::make('produce.index', compact('datas','employees','id'));
 

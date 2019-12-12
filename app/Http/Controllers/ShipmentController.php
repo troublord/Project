@@ -113,7 +113,7 @@ class shipmentController extends Controller
         }
 
         $data->save();
-        $workpiece->save();
+
          if($RTstat<=$workpiece->safety){
              $alert=new PostController();
              $alert->alert($request->workpiece_id);
@@ -171,6 +171,36 @@ class shipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), [
+            'shipment_amount'=>'numeric',
+            
+        ],[
+            'shipment_amount.numeric'    => '需為數字',
+            
+
+        ]);
+    
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }
+
+        $workpiece = WorkpieceEloquent::findOrFail($request->workpiece_id);
+        $RTstat=0;
+
+        if($workpiece->finished>=$request->shipment_amount){//出貨的數量需要小於可以送出的數量
+            $workpiece->finished=$workpiece->finished-$request->shipment_amount;
+            $RTstat=$workpiece->finished;
+        }else {
+            return redirect()->back()->withErrors(['出貨數量輸入錯誤', '輸入錯誤']);
+        }
+
+
+         if($RTstat<=$workpiece->safety){
+             $alert=new PostController();
+             $alert->alert($request->workpiece_id);
+         }
+         $workpiece->save();
         $data = ShipmentEloquent::findOrFail($id);
         $data->fill($request->all());
         $data->save();
@@ -185,8 +215,13 @@ class shipmentController extends Controller
      */
     public function destroy($id)
     {
+
         $data = ShipmentEloquent::findOrFail($id);
+        $workpiece = WorkpieceEloquent::findOrFail($data->workpiece_id);
+        $workpiece->finished=$workpiece->finished+$data->shipment_amount;
+        $workpiece->save();
         $data->delete();
+
         return Redirect::route('shipment.index');
     }
 }
