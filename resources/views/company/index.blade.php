@@ -24,7 +24,7 @@
             </h4>
 
         <div class="md-form mt-12">
-        <input class="form-control" type="text" placeholder="搜尋廠商名稱" aria-label="Search" name="name">
+        <input class="form-control" type="text" placeholder="搜尋廠商名稱或ID" aria-label="Search" name="name">
         </div>
         </form>
             <hr>
@@ -79,6 +79,9 @@
                     </div>
                 </div>
             @endforeach
+
+                {{ $companies->render() }}
+
         </div>
         <div class="col-md-4">
             <div class="list-group">

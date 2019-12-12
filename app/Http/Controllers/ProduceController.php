@@ -36,18 +36,22 @@ class ProduceController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate();
+        $datas = ProduceEloquent::orderBy('produce_id', 'DESC')->paginate(10);
         $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
 
 
         return View::make('produce.index', compact('datas','employees'));
     }
-    public function search(Request $id)
+    public function search(Request $name)
     {
-        $wid=$id->id;
-        $datas = ProduceEloquent::where('workpiece_id',$wid)->orderBy('produce_id', 'DESC')->get();
+        $wname=$name->name;
+        $workpiece = WorkpieceEloquent::where('workpiece_name','like',"%$wname%")->first();
+        $datas = ProduceEloquent::where('workpiece_id',$wname)->orderBy('produce_id', 'DESC')->paginate(5);
+        if (isset($workpiece)) {
+            $datas = ProduceEloquent::where('workpiece_id',$workpiece->workpiece_id)->orderBy('produce_id', 'DESC')->paginate(5);
+        }
         $employees = EmployeeEloquent::orderBy('total_index', 'DESC')->paginate();
-        return View::make('produce.index', compact('datas','employees','id'));
+        return View::make('produce.index', compact('datas','employees','name'));
 
 
     }
@@ -107,7 +111,7 @@ class ProduceController extends Controller
             return redirect()->back()->withErrors(['加工指數輸入錯誤', '輸入錯誤']);//沒跳出來
         }
         $data = new ProduceEloquent($request->all());
-        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate(5);
+        $employees = EmployeeEloquent::orderBy('employee_id', 'DESC')->paginate();
         $emp = EmployeeEloquent::findOrFail($data->employee_id);
         $emp->total_index=$emp->total_index+$request->pro_index;
         $emp->total_hours=$emp->total_hours+$request->pro_period;

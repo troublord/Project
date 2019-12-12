@@ -37,6 +37,15 @@ class PaymentRequestController extends Controller
         $datas = PaymentRequestEloquent::orderBy('request_id', 'DESC')->paginate(5);
         return View::make('paymentrequest.index', compact('datas'));
     }
+    public function search(Request $name)
+    {
+        $cname=$name->name;
+        $company = CompanyEloquent::where('company_name','like',"%$cname%")->pluck('company_id');
+        $datas = PaymentRequestEloquent::where('company_id',$company)->orderBy('request_id', 'DESC')->paginate(5);
+        return View::make('paymentrequest.index', compact('datas'));
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *

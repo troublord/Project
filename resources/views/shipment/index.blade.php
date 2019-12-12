@@ -5,7 +5,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
+        <form action="{{ route('shipment.search') }}" method="GET">
             <h4>
                 @auth
                     <div class="float-right">
@@ -13,10 +14,15 @@
                             <i class="fas fa-plus"></i>
                             <span class="pl-1">新增</span>
                         </a>
+                        <button class="btn btn-md btn-primary">搜尋</button>
                     </div>
                 @endauth
                 出貨單
             </h4>
+        <div class="md-form mt-12">
+        <input class="form-control" type="text" placeholder="搜尋廠商名稱或出貨單編號" aria-label="Search" name="name">
+        </div>
+        </form>
             <hr>
             @if(count($datas) == 0)
                 <p class="text-center">
@@ -66,6 +72,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $datas->render() }}
         </div>
         
 

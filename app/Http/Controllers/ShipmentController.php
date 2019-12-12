@@ -35,8 +35,33 @@ class shipmentController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate();
+        $datas = ShipmentEloquent::orderBy('shipment_id', 'DESC')->paginate(10);
         return View::make('shipment.index', compact('datas'));
+    }
+    public function search(Request $name)
+    {
+        $select=$name->name;
+        $company = CompanyEloquent::where('company_name','like',"%$select%")->first();
+        $datas = ShipmentEloquent::where('shipment_id',$select)->orderBy('shipment_id', 'DESC')->paginate(10);
+        if (isset($company)) {
+            $datas = ShipmentEloquent::where('company_id',$company->company_id)->orderBy('company_id', 'DESC')->paginate(10);
+        }
+        return View::make('shipment.index', compact('datas'));
+
+
+
+
+        $wname=$name->name;
+
+        $select=$name->name;
+        $company = CompanyEloquent::where('company_name','like',"%$select%")->first();
+        $companies = CompanyEloquent::where('company_id',$select)->orderBy('company_id', 'DESC')->paginate(10);
+        if (isset($company)) {
+            $companies = CompanyEloquent::where('company_name','like',"%$select%")->orderBy('company_id', 'DESC')->paginate(10);
+        }
+
+
+
     }
 
     
@@ -88,8 +113,7 @@ class shipmentController extends Controller
         }
 
         $data->save();
-        
-
+        $workpiece->save();
          if($RTstat<=$workpiece->safety){
              $alert=new PostController();
              $alert->alert($request->workpiece_id);

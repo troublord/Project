@@ -21,7 +21,7 @@
                 生產紀錄表
             </h4>
             <div class="md-form mt-12">
-                <input class="form-control" type="text" placeholder="搜尋工件ID" aria-label="Search" name="id">
+                <input class="form-control" type="text" placeholder="搜尋工件名稱或ID" aria-label="Search" name="name">
             </div>
         </form>
             <hr>
@@ -84,9 +84,7 @@
 
                         </td>
                         <td>
-                        <a href="{{ route('produce.show', ['id' => $data->produce_id]) }}" class="float-right card-link">
                         {{ $data->created_at }}
-                        </a>
                         </td>
                     </tr>
                 </form>
@@ -94,15 +92,27 @@
 
                
             @endforeach
+
+                
+
             </tbody>
+            
             </talbe>
+            
         </div>
+        
        
 
 
 
     </div>
+    {{ $datas->render() }}
 
 </div>
-
+<script>
+$(document).ready(function () {
+  $('#dtBasicExample').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>
 @stop

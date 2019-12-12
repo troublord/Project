@@ -26,7 +26,7 @@ class Company extends Model
       return $this->hasMany(ReceiptEloquent::class, 'company_id');
     }
     public function shipments(){
-      return $this->hasMany(ShipmentEloquentEloquent::class, 'company_id');
+      return $this->hasMany(ShipmentEloquent::class, 'company_id');
     }
     public function storages(){
       return $this->hasMany(StorageEloquent::class, 'company_id');

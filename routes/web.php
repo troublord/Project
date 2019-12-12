@@ -27,14 +27,16 @@
 
 Route::get('/company/search','CompanyController@search')->name('company.search');
 Route::resource('company', 'CompanyController');
-Route::resource('workpiece', 'WorkpieceController');
+Route::resource('workpiece', 'WorkpieceController', ['except' => ['show','destroy']]);
 Route::resource('employee', 'EmployeeController');
+Route::get('/paymentrequest/search','PaymentRequestController@search')->name('paymentrequest.search');
 Route::resource('paymentrequest', 'PaymentRequestController');
 Route::get('/produce/search','ProduceController@search')->name('produce.search');
 Route::get('/produce/search_emp','ProduceController@search_emp')->name('produce.search_emp');
-Route::resource('produce', 'ProduceController');
+Route::resource('produce', 'ProduceController', ['except' => ['show']]);
 Route::resource('purchase', 'PurchaseController');
 Route::resource('receipt', 'ReceiptController');
+Route::get('/shipment/search','ShipmentController@search')->name('shipment.search');
 Route::resource('shipment', 'ShipmentController');
 Route::get('/storage/search','StorageController@search')->name('storage.search');
 Route::resource('storage', 'StorageController');

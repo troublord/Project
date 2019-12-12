@@ -9,6 +9,10 @@ use View;
 use Redirect;
 use App\Company as CompanyEloquent;
 use App\Receipt as ReceiptEloquent;
+use App\PaymentRequest as PaymentRequestEloquent;
+use App\Shipment as ShipmentEloquent;
+use App\Storage as StorageEloquent;
+use App\Purchase as PurchaseEloquent;
 
 class CompanyController extends Controller
 {
@@ -32,14 +36,19 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->get();
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
         $receipts=ReceiptEloquent::groupBy('company_id')->selectRaw('sum(receipt_total) as sum, company_id')->orderBy('sum', 'desc')->get();
         return View::make('company.index', compact('companies','receipts'));
     }
     public function search(Request $name)
     {
         $cname=$name->name;
-        $companies = CompanyEloquent::where('company_name','like',"%$cname%")->orderBy('company_id', 'DESC')->get();
+        $company = CompanyEloquent::where('company_name','like',"%$cname%")->first();
+        $companies = CompanyEloquent::where('company_id',$cname)->orderBy('company_id', 'DESC')->paginate(10);
+        if (isset($company)) {
+            $companies = CompanyEloquent::where('company_name','like',"%$cname%")->orderBy('company_id', 'DESC')->paginate(10);
+        }
+
         $receipts=ReceiptEloquent::groupBy('company_id')->selectRaw('sum(receipt_total) as sum, company_id')->orderBy('sum', 'desc')->get();
         return View::make('company.index', compact('companies','receipts','cname'));
 
@@ -52,7 +61,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate(5);
+        $companies = CompanyEloquent::orderBy('company_id', 'DESC')->paginate();
         return View::make('company.create', compact('companies'));   
         // 這邊船什麼過去沒差  沒有什麼要顯示的
     }
@@ -156,6 +165,17 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+
+
+        $payment = PaymentRequestEloquent::where('company_id',$id)->find();
+        $shipment = ShipmentEloquent::where('company_id',$id)->find();
+        $storage = StorageRequestEloquent::where('company_id',$id)->find();
+        $purchase = PurchaseEloquent::where('company_id',$id)->find();
+
+        $payment->delete();
+        $shipment->delete();
+        $storage->delete();
+        $purchase->delete();
         $company = CompanyEloquent::findOrFail($id);
         $company->delete();
         return Redirect::route('company.index');

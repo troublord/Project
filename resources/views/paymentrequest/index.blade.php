@@ -6,6 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+        <form action="{{ route('paymentrequest.search') }}" method="GET">
             <h4>
                 @auth
                     <div class="float-right">
@@ -13,10 +14,15 @@
                             <i class="fas fa-plus"></i>
                             <span class="pl-1">新增</span>
                         </a>
+                        <button class="btn btn-md btn-primary">搜尋</button>
                     </div>
                 @endauth
                 請款單
             </h4>
+        <div class="md-form mt-12">
+        <input class="form-control" type="text" placeholder="搜尋廠商名稱" aria-label="Search" name="name">
+        </div>
+        </form>
             <hr>
             @if(count($datas) == 0)
                 <p class="text-center">
@@ -70,6 +76,7 @@
                                     <span class="pl-1">刪除</span>
                                 </button>
                             
+                        @endauth
 
                         </td>
                         <td>
@@ -79,11 +86,10 @@
                         </td>
                     </tr>
                 </form>
-                @endauth
 
                
             @endforeach
-
+            {{ $datas->render() }}
 
 
             </tbody>

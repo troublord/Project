@@ -21,7 +21,7 @@
                 入庫單
             </h4>
         <div class="md-form mt-12">
-        <input class="form-control" type="text" placeholder="搜尋工件ID" aria-label="Search" name="id">
+        <input class="form-control" type="text" placeholder="搜尋工件名稱或ID" aria-label="Search" name="name">
         </div>
         </form>
             <hr>
@@ -91,7 +91,7 @@
                
             @endforeach
 
-
+            {{ $datas->render() }}
 
             </tbody>
             </talbe>
